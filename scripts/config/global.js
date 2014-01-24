@@ -10,7 +10,7 @@ require.config({
       // js/lib/jquery-1.9.0.js, relative to
       // the HTML page.
       jquery: '../Library/jquery-2.0.3.min',
-      _: '../Library/underscore-1.5.2.min',
+      underscore: '../Library/underscore-1.5.2.min',
       backbone: '../Library/backbone-1.1.0.min',
       jquerymobile: '../Library/jquery.mobile-1.4.0/jquery.mobile-1.4.0',
       handlebar: '../Library/emberjs-1.0.0/js/libs/handlebars-1.0.0',
@@ -26,8 +26,17 @@ require.config({
       more: 'controllers/more',
       app: 'jqmapp',
       start: 'start'
-  }
-});
+    },
+    shim: {
+      underscore: {
+        exports: '_'
+      },
+      backbone: {
+        deps: ["underscore", "jquery"],
+        exports: "Backbone"
+      }
+    }
+  });
 
 require(['start'], function(start) {
   start();
