@@ -10,6 +10,8 @@ require.config({
       // js/lib/jquery-1.9.0.js, relative to
       // the HTML page.
       jquery: '../Library/jquery-2.0.3.min',
+      _: '../Library/underscore-1.5.2.min',
+      backbone: '../Library/backbone-1.1.0.min',
       jquerymobile: '../Library/jquery.mobile-1.4.0/jquery.mobile-1.4.0',
       handlebar: '../Library/emberjs-1.0.0/js/libs/handlebars-1.0.0',
       ember: '../Library/emberjs-1.0.0/js/libs/ember-1.0.0',
