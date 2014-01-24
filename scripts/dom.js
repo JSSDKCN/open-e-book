@@ -1,3 +1,28 @@
+define(['jquery', 'skyex'], function($, skyex) {
+function hasPhoneGap() {
+  return (typeof cordova !== 'undefined') || (typeof PhoneGap !== 'undefined') || (typeof phonegap !== 'undefined');
+}
+
+function getUrl(image_ids) {
+  var url = '/assets/img/no_book_pic.jpg';
+  try {
+    image_ids = eval("(" + image_ids + ")");
+  } catch (e) {
+    image_ids = null;
+  }
+
+  if (image_ids && image_ids.length) {
+    image_ids = image_ids[0];
+
+    for ( var k in image_ids) {
+      url = image_ids[k];
+      break;
+    }
+  }
+  return url;
+}
+
+
 var htmlTemplate = {};
 htmlTemplate['initAccount'] = {
   tag : 'div',
@@ -31,7 +56,7 @@ htmlTemplate['initAccount'] = {
         text : '我的信息',
         events : {
           click : function() {
-            //skyex.app.user.initProfile(user);
+            //user.initProfile(user);
           }
         }
       } ]
@@ -42,7 +67,7 @@ htmlTemplate['initAccount'] = {
         text : '修改密码',
         events : {
           click : function() {
-            //skyex.app.user.initPassword();
+            //user.initPassword();
           }
         }
       } ]
@@ -53,7 +78,7 @@ htmlTemplate['initAccount'] = {
         text : '我的书籍',
         events : {
           click : function() {
-            //skyex.app.user.initPassword();
+            //user.initPassword();
           }
         }
       } ]
@@ -68,7 +93,8 @@ htmlTemplate['initAccount'] = {
     },
     events : {
       click : function() {
-        skyex.app.user.logout();
+        var user = require('user');
+        user.logout();
       }
     }
   } ]
@@ -148,7 +174,8 @@ htmlTemplate['initLogin'] = {
     },
     events : {
       click : function() {
-        skyex.app.user.initForgetPassword();
+        var user = require('user');
+        user.initForgetPassword();
       }
     }
   }, {
@@ -159,7 +186,8 @@ htmlTemplate['initLogin'] = {
     },
     events : {
       click : function() {
-        skyex.app.user.initRegister();
+        var user = require('user');
+        user.initRegister();
       }
     }
   }, ],
@@ -183,7 +211,8 @@ htmlTemplate['initLogin'] = {
         switch (data.status) {
         case 1:
           // alert(data.message);
-          skyex.app.user.profile();
+          var user = require('user');
+          user.profile();
           break;
         }
       });
@@ -211,7 +240,8 @@ htmlTemplate['initForgetPassword'] = {
         switch (data.status) {
           case 1:
             alert(data.message);
-            skyex.app.user.initLogin();
+            var user = require('user');
+            user.initLogin();
             break;
           case 2:
             alert(data.message, 2);
@@ -333,7 +363,8 @@ htmlTemplate['initRegister'] = {
         switch (data.status) {
           case 1:
             alert(data.message);
-            skyex.app.user.initLogin();
+            var user = require('user');
+            user.initLogin();
             break;
         }
       });
@@ -592,7 +623,8 @@ htmlTemplate['initModifyPassword'] = {
         switch (data.status) {
           case 1:
             alert(data.message);
-            skyex.app.user.initAccount(skyex.app.user.data);
+            var user = require('user');
+            user.initAccount(user.data);
             break;
         }
       });
@@ -731,11 +763,12 @@ htmlTemplate['initProfile'] = {
         switch (data.status) {
           case 1:
             alert(data.message);
-            skyex.app.user.data.username = username;
-            skyex.app.user.data.mobile = mobile;
-            skyex.app.user.data.email = email;
-            skyex.app.user.data.gender = gender;
-            skyex.app.user.initAccount(skyex.app.user.data);
+            var user = require('user');
+            user.data.username = username;
+            user.data.mobile = mobile;
+            user.data.email = email;
+            user.data.gender = gender;
+            user.initAccount(user.data);
             break;
         }
       });
@@ -1033,7 +1066,8 @@ htmlTemplate['initFeedback'] = {
           case 2:
 
             alert(data.message, 2);
-            skyex.app.user.initLogin();
+            var user = require('user');
+            user.initLogin();
             break;
           case 1:
             alert(data.message, 5);
@@ -1164,7 +1198,8 @@ htmlTemplate['initBook'] = {
         text : '最近阅读',
         events : {
           click : function() {
-            skyex.app.user.created();
+            var user = require('user');
+            user.created();
           }
         }
       } ]
@@ -1175,7 +1210,8 @@ htmlTemplate['initBook'] = {
         text : '我创建的',
         events : {
           click : function() {
-            skyex.app.user.created();
+            var user = require('user');
+            user.created();
           }
         }
       } ]
@@ -1186,7 +1222,8 @@ htmlTemplate['initBook'] = {
         text : '我收藏的',
         events : {
           click : function() {
-            skyex.app.user.subscribed();
+            var user = require('user');
+            user.subscribed();
           }
         }
       } ]
@@ -1439,15 +1476,17 @@ htmlTemplate['bookHeader'] = [ {
         flipswitch : []
       },
       after : function(book) {
+        var user = require("user");
         console.log('after');
         console.log(book);
-        console.log(skyex.app.user.data);
-        if (!skyex.app.user.data || !book) {
+        var user = require('user');
+        console.log(user.data);
+        if (!user.data || !book) {
           console.log('return');
           return;
         }
 
-        var books = skyex.app.user.data.sub_books;
+        var books = user.data.sub_books;
         var value = '订阅';
         var self = this;
         if (books && (books.indexOf(book.id) > -1)) {
@@ -1471,7 +1510,8 @@ htmlTemplate['bookHeader'] = [ {
               break;
           }
           var self = this;
-          skyex.app.user.subscribe(book.id, value, function() {
+          var user = require('user');
+          user.subscribe(book.id, value, function() {
             console.log("inside clear");
             clearTimeout(timer);
             $(self).val(self.value);
@@ -1782,3 +1822,7 @@ htmlTemplate['initAddBook'] = {
 
 console.log('inside dom');
 console.log(htmlTemplate['initLogin']);
+return {
+  htmlTemplate: htmlTemplate
+};
+});
