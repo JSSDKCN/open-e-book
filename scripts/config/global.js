@@ -15,7 +15,7 @@ require.config({
       jquerymobile: '../Library/jquery.mobile-1.4.0/jquery.mobile-1.4.0',
       handlebar: '../Library/emberjs-1.0.0/js/libs/handlebars-1.0.0',
       ember: '../Library/emberjs-1.0.0/js/libs/ember-1.0.0',
-      skyex: 'config/book',
+      skyex: 'config/skyex',
       req: 'library/request',
       file: 'library/file',
       j2html: '../Library/json2html',

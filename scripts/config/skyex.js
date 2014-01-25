@@ -9,6 +9,9 @@ define(function() {
   // skyex.domain = 't1book.com';
   // skyex.domain = location.hostname;
   skyex.domain = 'book.t1bao.com';
+  if (location.hostname) {
+    skyex.domain = location.hostname;
+  }
   skyex.assetsUrl = '/assets';
   skyex.requestUrl = 'http://' + skyex.domain + '/web/app';
   skyex.requestUrl = '';
