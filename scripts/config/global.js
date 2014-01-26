@@ -13,8 +13,6 @@ require.config({
       underscore: '../Library/underscore-1.5.2.min',
       backbone: '../Library/backbone-1.1.0.min',
       jquerymobile: '../Library/jquery.mobile-1.4.0/jquery.mobile-1.4.0',
-      handlebar: '../Library/emberjs-1.0.0/js/libs/handlebars-1.0.0',
-      ember: '../Library/emberjs-1.0.0/js/libs/ember-1.0.0',
       skyex: 'config/skyex',
       req: 'library/request',
       file: 'library/file',

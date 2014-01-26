@@ -1,0 +1,17 @@
+{
+  "name": "open-e-book",
+  "version": "0.1.0",
+  "description": "Open E-book project",
+  "homepage": "http://book.t1bao.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/calidion/open-e-book.git"
+  },
+  "author": "calidion",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-requirejs": "~0.4.1",
+    "grunt-contrib-cssmin": "~0.7.0",
+    "grunt-contrib-htmlmin": "~0.1.3"
+  }
+}
