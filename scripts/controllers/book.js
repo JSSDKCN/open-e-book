@@ -1,6 +1,6 @@
 define(['jquery', 'skyex', 'req', 'dom'], function($, skyex, req, xdom) {
   skyex.app.book = {
-      idx: 1,
+      idx: 0,
       bar : null,
       page : 1,
       more : null,
@@ -235,7 +235,7 @@ define(['jquery', 'skyex', 'req', 'dom'], function($, skyex, req, xdom) {
         
       },
       initSearch : function() {
-        
+        return;
         var query = $('<input>').attr('type', 'search').attr('name', 'q').val('').attr('placeholder', '请输入要搜索的书名')
             .textinput();
         var form = $('<form>');

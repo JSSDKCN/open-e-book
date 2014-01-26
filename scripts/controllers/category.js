@@ -1,6 +1,6 @@
 define(['jquery', 'skyex', 'req', 'dom'], function($, skyex, req, xdom) {
   skyex.app.category = {
-      idx: 2,
+      idx: 1,
       pid : [],
       get : function(id, next) {
         skyex.app.tab.swap($('#nav-bar-' + skyex.app.category.idx));

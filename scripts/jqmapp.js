@@ -13,14 +13,6 @@ define(['jquery', 'skyex', 'req', 'dom', 'user', 'book', 'category', 'more'], fu
       
       init : function() {
         var tabs = [{
-            'name' : '我的天易',
-            'icon' : 'home',
-            'action' : function() {
-              // skyex.app.user.idx = 0;
-              // skyex.app.user.init();
-              user.init();
-            }
-        }, {
             'name' : '书籍',
             'icon' : 'search',
             'action' : function() {
@@ -34,7 +26,15 @@ define(['jquery', 'skyex', 'req', 'dom', 'user', 'book', 'category', 'more'], fu
               
               category.get();
             }
-        }, {
+        },{
+          'name' : '我的天易',
+          'icon' : 'home',
+          'action' : function() {
+            // skyex.app.user.idx = 0;
+            // skyex.app.user.init();
+            user.init();
+          }
+      },  {
             'name' : '更多',
             'icon' : 'gear',
             'action' : function() {

@@ -30,7 +30,7 @@ define(['jquery', 'skyex', 'req', 'dom', 'underscore', 'backbone'], function($, 
   
   var user;
   user = {
-      idx: 0,
+      idx: 2,
       data: null,
       
       /*

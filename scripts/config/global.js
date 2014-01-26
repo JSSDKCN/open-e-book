@@ -23,7 +23,9 @@ require.config({
       category: 'controllers/category',
       more: 'controllers/more',
       app: 'jqmapp',
-      start: 'start'
+      start: 'start',
+      main: 'main'
+        
     },
     shim: {
       underscore: {
@@ -35,7 +37,6 @@ require.config({
       }
     }
   });
-
 require(['start'], function(start) {
   start();
 });

@@ -22,9 +22,11 @@ module.exports = function(grunt) {
         compile: {
           options: {
               baseUrl: "scripts",
-              name: 'start',
+              name: 'main',
+              optimize: 'uglify',
               mainConfigFile: "scripts/config/global.js",
               out: "dest/scripts/<%= pkg.name %>.min.js",
+              findNestedDependencies: true,
               include: ['../Library/require.js']
           }
         }
