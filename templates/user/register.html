@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<base href="file:///C:/Users/eric/Documents/GitHub/openbookfront/book.html">
+<meta charset="utf-8">
+<meta name="viewport"
+  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="format-detection" content="telephone=no">
+<link rel="stylesheet" href="Library/jquery.mobile-1.4.0/jquery.mobile-1.4.0.css">
+<link rel="stylesheet" href="styles/jqmapp.css">
+<script src="Library/jquery-2.0.3.js"></script>
+<script src="Library/jquery.mobile-1.4.0/jquery.mobile-1.4.0.js"></script>
+<title></title>
+</head>
+<body>
+  <div data-role="page">
+    <div data-role="header" data-position="fixed">
+    <a data-icon="arrow-l">返回</a>
+      <h1 class="title">用户注册</h1>
+    </div>
+    <div class="wrapper" data-role="content">
+      <form method="post">
+        <div data-role="fieldcontain">
+          <label for="username">用户名：</label> <input name="username" id="username" maxlength="20" type="text"
+            placeholder="由4-20位中英文、数字组成">
+        </div>
+        <div data-role="fieldcontain">
+          <label for="password">密码:</label> <input name="password" id="password" maxlength="20" type="password"
+            placeholder="由6-20位字母、数字或符号组成">
+        </div>
+        <div data-role="fieldcontain">
+          <label for="password2">确认密码:</label> <input name="password2" id="password2" maxlength="20" type="password"
+            placeholder="请再次输入密码">
+        </div>
+        <div data-role="fieldcontain">
+          <label for="email">邮箱:</label> <input name="email" id="email" maxlength="20" type="text"
+            placeholder="请输入常用邮箱，用来找回密码">
+        </div>
+        <div data-role="fieldcontain">
+          <label for="verific_code">验证码：</label> <input name="captcha" type="text" placeholder="请输入验证码"
+            id="verific_code">
+        </div>
+        <div data-role="fieldcontain">
+          <label for="verific_code"></label><img id="verific_code_image"
+            src="http://book.t1bao.com/jqmapp/captcha/81901284429bff87ed2d7c3866e18e42" alt="验证码"><span
+            style="cursor: pointer; color: red; padding: 0px 0.4em;">点击图片刷新</span>
+        </div>
+        <div data-role="fieldcontain">
+          <label for=""></label>
+        </div>
+        <div class="ui-btn ui-input-btn ui-corner-all ui-shadow">
+          <a>注册</a>
+        </div>
+      </form>
+    </div>
+    <div data-role="footer" data-position="fixed" id="footer">
+      <div data-role="navbar">
+        <ul>
+          <li><a data-id="0" data-icon="search" id="nav-bar-0" class="ui-btn-active">书籍</a></li>
+          <li><a data-id="1" data-icon="grid" id="nav-bar-1">分类</a></li>
+          <li><a data-id="2" data-icon="home" id="nav-bar-2">我的天易</a></li>
+          <li><a data-id="3" data-icon="gear" id="nav-bar-3">更多</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

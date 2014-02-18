@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<base href="file:///C:/Users/eric/Documents/GitHub/openbookfront/">
+<meta charset="utf-8">
+<meta name="viewport"
+  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="format-detection" content="telephone=no">
+<link rel="stylesheet" href="Library/jquery.mobile-1.4.0/jquery.mobile-1.4.0.css">
+<link rel="stylesheet" href="styles/jqmapp.css">
+<script data-main="scripts/config/angularconf" src="Library/requirejs/require.js"></script>
+<title></title>
+<script type=text/ng-template id="book-main.html">
+        <ul data-role="listview">
+          <li><a>所有书籍</a></li>
+          <li><a>最近阅读</a></li>
+          <li><a>我创建的</a></li>
+          <li><a>我收藏的</a></li>
+        </ul>
+</script>
+</head>
+<body>
+  <div data-role="page">
+    <div data-role="header" data-position="fixed">
+      <a data-icon="arrow-l">返回</a>
+      <h1 class="title ui-title">我的书籍</h1>
+      <a data-icon="plus">添加我的书</a>
+    </div>
+    <div class="wrapper" data-role="content" ng-view></div>
+    <div data-role="footer" data-position="fixed" id="footer">
+      <div data-role="navbar" ng-controller="NavBarCtrl">
+        <ul>
+          <li ng-repeat="navbar in navbars"><a message-id="{{navbar.id}}" data-icon="{{navbar.icon}}"
+            id="nav-bar-{{navbar.id}}" ng-class="{'ui-btn-active': navbar.isActive}">{{navbar.name}}</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

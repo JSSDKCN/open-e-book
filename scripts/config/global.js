@@ -9,9 +9,9 @@ require.config({
       // is using jQuery 1.9.0 located at
       // js/lib/jquery-1.9.0.js, relative to
       // the HTML page.
-      jquery: '../Library/jquery-2.0.3.min',
-      underscore: '../Library/underscore-1.5.2.min',
-      backbone: '../Library/backbone-1.1.0.min',
+      jquery: '../Library/jquery-2.0.3',
+      underscore: '../Library/underscore-1.5.2',
+      backbone: '../Library/backbone-1.1.0',
       jquerymobile: '../Library/jquery.mobile-1.4.0/jquery.mobile-1.4.0',
       skyex: 'config/skyex',
       req: 'library/request',

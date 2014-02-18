@@ -36,3 +36,12 @@ body {
 	width: 70%;
 	
 }
+
+.ui-mobile,
+.ui-mobile body {
+  height: 100%;
+}
+
+.about p a {
+	text-decoration: none;
+}
