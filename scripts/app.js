@@ -8,8 +8,13 @@ define(["angular", "angular-resource", 'angular-route'], function(angular) {
         controller: function($scope) {
           
         }
+    }).when('/book', {
+        templateUrl: 'templates/book/main.html',
+        controller: function($scope) {
+          
+        }
     }).when('/category', {
-        templateUrl: 'category',
+        templateUrl: 'templates/category/main.html',
         controller: 'CategoryCtrl'
     }).when('/user', {
         templateUrl: 'user',
@@ -17,7 +22,7 @@ define(["angular", "angular-resource", 'angular-route'], function(angular) {
     }).when('/more', {
         templateUrl: 'more',
         controller: 'MoreCtrl'
-    });
+    }).otherwise('/book');
   }]);
   
   app.controller('NavBarCtrl', function($scope) {
