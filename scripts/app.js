@@ -2,12 +2,9 @@ define(["angular", "angular-resource", 'angular-route'], function(angular) {
   var app = angular.module("app", ["ngResource", 'ngRoute']);
   // you can do some more stuff here like calling app.factory()...
   'use strict';
-  app.run(function($templateCache) {
-    $templateCache.get('book-main.html');
-  });
   app.config(['$routeProvider', function($routeProvider) {
-    $routeProvider.when('/book', {
-        templateUrl: 'book-main.html',
+    $routeProvider.when('/', {
+        templateUrl: 'templates/book/main.html',
         controller: function($scope) {
           
         }
@@ -20,10 +17,6 @@ define(["angular", "angular-resource", 'angular-route'], function(angular) {
     }).when('/more', {
         templateUrl: 'more',
         controller: 'MoreCtrl'
-    });
-    
-    $routeProvider.otherwise({
-      redirectTo: '/book'
     });
   }]);
   
