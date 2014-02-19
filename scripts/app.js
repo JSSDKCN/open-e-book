@@ -2,29 +2,93 @@ define(["angular", "angular-resource", 'angular-route'], function(angular) {
   var app = angular.module("app", ["ngResource", 'ngRoute']);
   // you can do some more stuff here like calling app.factory()...
   'use strict';
+  
+  /*
+   * app.run(function($routeScope) { console.log('router changed global');
+   * $routeScope.$on('$routeChangeSuccess', contentLoad); });
+   */
+
+  function contentLoad() {
+    console.log('router changed');
+    // run some code to do your animations
+    jQuery('div[data-role=content]').trigger('create');
+  }
+  
+  var bookCtrl = ['$scope', function($scope) {
+    console.log('inside bookCtrl');
+    $scope.$on('$routeChangeSuccess', contentLoad);
+  }];
   app.config(['$routeProvider', function($routeProvider) {
-    $routeProvider.when('/', {
+    $routeProvider
+    // Book
+    .when('/', {
         templateUrl: 'templates/book/main.html',
+        controller: bookCtrl
+    }).when('/book/all', {
+        templateUrl: 'templates/book/all.html',
         controller: function($scope) {
-          
+          $scope.showBackButton = true;
+          $scope.url = "/book";
+          $scope.$on('$routeChangeSuccess', contentLoad);
         }
     }).when('/book', {
         templateUrl: 'templates/book/main.html',
-        controller: function($scope) {
-          
-        }
-    }).when('/category', {
+        controller: bookCtrl
+    }).when('/book/:bid', {
+        templateUrl: 'templates/book/content.html',
+        controller: bookCtrl
+    }).when('/book/:bid/chapter/:cid', {
+        templateUrl: 'templates/book/chapter.html',
+        controller: bookCtrl
+    })
+
+    // Category
+    .when('/category', {
         templateUrl: 'templates/category/main.html',
         controller: 'CategoryCtrl'
-    }).when('/user', {
-        templateUrl: 'user',
+    })
+    // User part
+    .when('/user', {
+        templateUrl: 'templates/user/login.html',
         controller: 'UserCtrl'
-    }).when('/more', {
-        templateUrl: 'more',
+    }).when('/user/login', {
+        templateUrl: 'templates/user/login.html',
+        controller: 'UserCtrl'
+    }).when('/user/register', {
+        templateUrl: 'templates/user/register.html',
+        controller: 'UserCtrl'
+    }).when('/user/password/retrieve', {
+        templateUrl: 'templates/user/password/retrieve.html',
+        controller: 'UserCtrl'
+    })
+
+    // More
+    .when('/more', {
+        templateUrl: 'templates/other/main.html',
         controller: 'MoreCtrl'
-    }).otherwise('/book');
+    }).when('/about', {
+        templateUrl: 'templates/other/about.html',
+        controller: 'MoreCtrl'
+    }).when('/feedback', {
+        templateUrl: 'templates/other/feedback.html',
+        controller: 'MoreCtrl'
+    });
   }]);
   
+  app.controller('CategoryCtrl', function($scope) {
+    $scope.$on('$routeChangeSuccess', contentLoad);
+  });
+  
+  app.controller('UserCtrl', function($scope) {
+    $scope.$on('$routeChangeSuccess', contentLoad);
+  });
+  
+  app.controller('MoreCtrl', function($scope) {
+    $scope.$on('$routeChangeSuccess', contentLoad);
+  });
+  app.controller('HeaderCtrl', function($scope) {
+    
+  });
   app.controller('NavBarCtrl', function($scope) {
     $scope.navbars = [{
         'name': '书籍',
@@ -52,6 +116,5 @@ define(["angular", "angular-resource", 'angular-route'], function(angular) {
         'isActive': false,
     }];
   });
-  console.log('app defined');
   return app;
 });

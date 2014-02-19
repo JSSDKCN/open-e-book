@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<base href="/">
 <meta charset="utf-8">
 <meta name="viewport"
   content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
@@ -12,11 +13,11 @@
 <title></title>
 </head>
 <body>
-  <div data-role="page">
-    <div data-role="header" data-position="fixed">
-      <a data-icon="arrow-l">返回</a>
+  <div data-role="page" style="display: none">
+    <div data-role="header" data-position="fixed" ng-controller="HeaderCtrl">
+      <a data-icon="arrow-l" ng-show="showBackButton" href="#{{url}}">返回</a>
       <h1 class="title ui-title">我的书籍</h1>
-      <a data-icon="plus">添加我的书</a>
+      <a data-icon="plus" ng-show="addBook">添加我的书</a>
     </div>
     <div class="wrapper" data-role="content" ng-view></div>
     <div data-role="footer" data-position="fixed" id="footer">

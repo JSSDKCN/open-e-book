@@ -4,6 +4,6 @@ require(['jQuery', 'app', 'angular', 'angular-resource', 'domReady'], function($
     console.log('app bootstrap');
   });
   require(['jQueryMobile'], function() {
-    
+    $('div[data-role=page]').show();
   });
 });
