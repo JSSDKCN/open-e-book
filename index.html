@@ -15,16 +15,16 @@
 <body>
   <div data-role="page" style="display: none">
     <div data-role="header" data-position="fixed" ng-controller="HeaderCtrl">
-      <a data-icon="arrow-l" ng-show="showBackButton" href="#{{url}}">返回</a>
-      <h1 class="title ui-title">我的书籍</h1>
-      <a data-icon="plus" ng-show="addBook">添加我的书</a>
+      <a data-icon="{{backButtonIcon}}" ng-show="showBackButton" href="#{{url}}">{{backButtonText}}</a>
+      <h1 class="title ui-title">{{title}}</h1>
+      <a data-icon="plus" ng-show="showAddBook">{{addBookText}}</a>
     </div>
     <div class="wrapper" data-role="content" ng-view></div>
     <div data-role="footer" data-position="fixed" id="footer">
       <div data-role="navbar" ng-controller="NavBarCtrl">
         <ul>
           <li ng-repeat="navbar in navbars"><a message-id="{{navbar.id}}" data-icon="{{navbar.icon}}"
-            id="nav-bar-{{navbar.id}}" href="#/{{navbar.href}}" ng-class="{'ui-btn-active': navbar.isActive}">{{navbar.name}}</a></li>
+            id="nav-bar-{{navbar.id}}" href="#/{{navbar.href}}" >{{navbar.name}}</a></li>
         </ul>
       </div>
     </div>
