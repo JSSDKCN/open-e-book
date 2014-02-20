@@ -15,9 +15,9 @@
 <body>
   <div data-role="page" style="display: none">
     <div data-role="header" data-position="fixed" ng-controller="HeaderCtrl">
-      <a data-icon="{{backButtonIcon}}" ng-show="showBackButton" href="#{{url}}">{{backButtonText}}</a>
-      <h1 class="title ui-title">{{title}}</h1>
-      <a data-icon="plus" ng-show="showAddBook">{{addBookText}}</a>
+      <a data-icon="{{header.backButtonIcon}}" ng-show="header.showBackButton" href="#{{header.url}}">{{header.backButtonText}}</a>
+      <h1 class="title ui-title">{{header.title}}</h1>
+      <a data-icon="plus" ng-show="header.showAddBook">{{header.addBookText}}</a>
     </div>
     <div class="wrapper" data-role="content" ng-view></div>
     <div data-role="footer" data-position="fixed" id="footer">
