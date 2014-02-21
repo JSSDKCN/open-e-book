@@ -12,33 +12,40 @@ define(['util', 'skyex'], function(util, skyex) {
           id: pid
       };
       
-      pids.push(pid);
-      
+
+      console.log(pids);
       if (cacheCategory[pid]) {
+        if (((pid == 0) && (pids.length <= 0)) || pid != 0) {
+          pids.push(pid);
+        }
         return cacheCategory[pid];
       }
       
       return skyex.post($http, params, function(response) {
         cacheCategory[pid] = response;
+        if (((pid == 0) && (pids.length <= 0)) || pid != 0) {
+          pids.push(pid);
+        }
         return response;
       });
     }
   };
   
-  category.controller = ['$scope', '$rootScope', 'categories', function($scope, $rootScope, categories) {
+  category.controller = ['$scope', '$rootScope', '$location', 'categories', function($scope, $rootScope, $location, categories) {
     console.log('inside category ctrl');
     console.log(categories.data);
+    console.log(pids);
     util.swap(1);
     var title = '书籍分类';
     var header = {
       title: title
     };
     if (pids.length > 1) {
-      //var ppid = pids[pids.length - 2];
+      //
       var pid = pids[pids.length - 1];
       console.log(pid);
       console.log(cacheCategory);
-      if (pid) {
+      if (pid != 0) {
         title = cacheCategory[pid].name;
         header = {
             title: title,
@@ -52,6 +59,23 @@ define(['util', 'skyex'], function(util, skyex) {
     
     $rootScope.back = function() {
       console.log('inside back');
+      var ppid = 0;
+      if (pids.length > 1) {
+        ppid = pids[pids.length - 2];
+        console.log(pids);
+        pids.pop();
+        if (pids.length > 1) {
+          pids.pop();
+        }
+        console.log(pids);
+      }
+      console.log(ppid);
+      
+      var path = '/category/' + ppid;
+      console.log(path);
+      
+
+      $location.path(path);
     };
     
     $rootScope.header = header;
