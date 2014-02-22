@@ -18,6 +18,24 @@ define(function() {
         
         jQuery('div[data-role=header]').trigger('refresh');
         jQuery('div[data-role=content]').trigger('create');
+      },
+      parseUrl: function(imageIds) {
+        var url = '';
+        try {
+          imageIds = eval("(" + imageIds + ")");
+        } catch (e) {
+          imageIds = null;
+        }
+        
+        if (imageIds && imageIds.length) {
+          imageIds = imageIds[0];
+          
+          for ( var k in imageIds) {
+            url = imageIds[k];
+            break;
+          }
+        }
+        return url;
       }
   };
 });

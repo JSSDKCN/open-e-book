@@ -14,7 +14,10 @@ define(["angular", "angular-resource", 'angular-route', 'skyex', 'category', 'ut
           templateUrl: templateUrl,
           controller: book.controller
       };
+      console.log(info);
       if (info.resolve) {
+        console.log('inside resolve');
+        console.log(info.resolve);
         when.resolve = info.resolve;
       }
       $routeProvider.when(info.url, when);
@@ -23,7 +26,8 @@ define(["angular", "angular-resource", 'angular-route', 'skyex', 'category', 'ut
     // Book
     .when('/', {
         templateUrl: 'templates/book/main.html',
-        controller: book.controller
+        controller: book.controller,
+        resolve: book.resolves.none
     })
 
     // Category

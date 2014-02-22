@@ -77,8 +77,6 @@ define(['util', 'skyex'], function(util, skyex) {
           console.log(ppid);
           
           var path = '/category/' + ppid;
-          console.log(path);
-          
           $location.path(path);
         };
         
