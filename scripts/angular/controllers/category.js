@@ -16,7 +16,7 @@ define(['util', 'skyex'], function(util, skyex) {
       if (cacheCategory[pid]) {
         
         if (pid == 0) {
-          pids = [0];
+          pids = ['0'];
         } else {
           pids.push(pid);
         }
