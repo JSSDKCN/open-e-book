@@ -59,7 +59,6 @@ define(['util', 'skyex'], function(util, skyex) {
                 backButtonText: '返回',
             };
           }
-          
         }
         
         $rootScope.back = function() {

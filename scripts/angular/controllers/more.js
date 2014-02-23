@@ -73,7 +73,7 @@ define(['util', 'skyex'], function(util, skyex) {
               switch (response.status) {
               case 2:
                 alert(response.message, 2);
-                $location.path('/user/login');
+                $location.path('/user');
                 break;
               case 1:
                 alert(response.message, 5);

@@ -12,7 +12,12 @@ define(function() {
         return 'http://' + this.domain() + '/jqmapp';
       },
       captchaUrl: function() {
-        return this.requestUrl() + '/captcha';
+        var id = this.session.get();
+        if (!id) {
+          return this.requestUrl() + '/captcha';          
+        }
+        return this.requestUrl() + '/captcha/' + id[1];
+        
       },
       downloadUrl: function() {
         return this.requestUrl() + '/download';
@@ -39,6 +44,9 @@ define(function() {
             if (this.postSession && localStorage) {
               localStorage[this.key] = value;
             }
+          },
+          update: function(post) {
+            this.set(post[this.key]);
           }
       },
       
@@ -91,7 +99,7 @@ define(function() {
           if (sessionToken) {
             requestData.append(sessionToken[0], sessionToken[1]);
           }
-          contentType = 'undefined';
+          contentType = false;
           transformRequest = null;
           
         } else {
@@ -121,6 +129,7 @@ define(function() {
           // when the response is available
           console.log("request end");
           console.log(response);
+          self.session.update(response.data);
           return callback(response.data);
         });
       }

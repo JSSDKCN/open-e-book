@@ -1,6 +1,6 @@
 define(["angular", "angular-resource", 'angular-route', 'skyex', 'category', 'util', 'navbar',
-        'book', 'more'], function(angular,
-    ngResource, ngRoute, skyex, category, util, navbar, book, more) {
+        'book', 'more', 'user'], function(angular,
+    ngResource, ngRoute, skyex, category, util, navbar, book, more, user) {
   var app = angular.module("app", ["ngResource", 'ngRoute']);
   // you can do some more stuff here like calling app.factory()...
   'use strict';
@@ -25,6 +25,7 @@ define(["angular", "angular-resource", 'angular-route', 'skyex', 'category', 'ut
     
     moduleToRoutes(book, $routeProvider);
     moduleToRoutes(more, $routeProvider);
+    moduleToRoutes(user, $routeProvider);
     
     $routeProvider
     // Book
@@ -45,40 +46,11 @@ define(["angular", "angular-resource", 'angular-route', 'skyex', 'category', 'ut
         controller: 'CategoryCtrl',
         resolve: category.resolve
     
-    })
-    // User part
-    .when('/user', {
-        templateUrl: 'templates/user/login.html',
-        controller: 'UserCtrl'
-    }).when('/user/login', {
-        templateUrl: 'templates/user/login.html',
-        controller: 'UserCtrl'
-    }).when('/user/register', {
-        templateUrl: 'templates/user/register.html',
-        controller: 'UserCtrl'
-    }).when('/user/password/retrieve', {
-        templateUrl: 'templates/user/password/retrieve.html',
-        controller: 'UserCtrl'
-    })
-    ;
+    });
   }]);
   
   app.controller('CategoryCtrl', category.controller);
-  
-  app.controller('UserCtrl', function($scope) {
-    util.swap(2);
-    $scope.$on('$routeChangeSuccess', util.contentLoad);
-  });
-  
-  app.controller('MoreCtrl', function($scope, $rootScope) {
-    util.swap(3);
-    var header = {
-      title: '更多信息'
-    
-    };
-    $rootScope.header = header;
-    $scope.$on('$routeChangeSuccess', util.contentLoad);
-  });
+
   app.controller('HeaderCtrl', function($scope) {
     
   });

@@ -14,6 +14,7 @@ require.config({
         navbar: 'angular/controllers/navbar',
         book: 'angular/controllers/book',
         more: 'angular/controllers/more',
+        user: 'angular/controllers/user',
         app: 'app',
     
     },
@@ -25,7 +26,7 @@ require.config({
           deps: ['jQuery']
         },
         'angular': {
-          'exports': 'angular'
+          exports: 'angular'
         },
         'angular-resource': {
           deps: ['angular']
