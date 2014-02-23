@@ -12,7 +12,7 @@ define(function() {
         // if (button) button.button();
         setTimeout(function() {
           var listview = jQuery('ul[data-role=listview]');
-          if (listview)
+          if (listview && listview.listview)
             listview.listview().listview('refresh');
         }, 10);
         

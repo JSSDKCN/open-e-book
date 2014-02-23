@@ -13,6 +13,7 @@ require.config({
         category: 'angular/controllers/category',
         navbar: 'angular/controllers/navbar',
         book: 'angular/controllers/book',
+        more: 'angular/controllers/more',
         app: 'app',
     
     },

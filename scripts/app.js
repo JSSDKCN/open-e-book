@@ -1,5 +1,6 @@
-define(["angular", "angular-resource", 'angular-route', 'skyex', 'category', 'util', 'navbar', 'book'], function(angular,
-    ngResource, ngRoute, skyex, category, util, navbar, book) {
+define(["angular", "angular-resource", 'angular-route', 'skyex', 'category', 'util', 'navbar',
+        'book', 'more'], function(angular,
+    ngResource, ngRoute, skyex, category, util, navbar, book, more) {
   var app = angular.module("app", ["ngResource", 'ngRoute']);
   // you can do some more stuff here like calling app.factory()...
   'use strict';
@@ -8,20 +9,23 @@ define(["angular", "angular-resource", 'angular-route', 'skyex', 'category', 'ut
   // Config $routeProvider
   app.config(['$routeProvider', function($routeProvider) {
     
-    for(templateUrl in book.templates) {
-      var info = book.templates[templateUrl];
-      var when = {
-          templateUrl: templateUrl,
-          controller: book.controller
-      };
-      console.log(info);
-      if (info.resolve) {
-        console.log('inside resolve');
-        console.log(info.resolve);
-        when.resolve = info.resolve;
+    function moduleToRoutes(module, route) {
+      for(templateUrl in module.templates) {
+        var info = module.templates[templateUrl];
+        var when = {
+            templateUrl: templateUrl,
+            controller: module.controller
+        };
+        if (info.resolve) {
+          when.resolve = info.resolve;
+        }
+        route.when(info.url, when);
       }
-      $routeProvider.when(info.url, when);
     }
+    
+    moduleToRoutes(book, $routeProvider);
+    moduleToRoutes(more, $routeProvider);
+    
     $routeProvider
     // Book
     .when('/', {
@@ -56,53 +60,17 @@ define(["angular", "angular-resource", 'angular-route', 'skyex', 'category', 'ut
         templateUrl: 'templates/user/password/retrieve.html',
         controller: 'UserCtrl'
     })
-
-    // More
-    .when('/more', {
-        templateUrl: 'templates/other/main.html',
-        controller: 'MoreCtrl'
-    }).when('/about', {
-        templateUrl: 'templates/other/about.html',
-        controller: function($scope, $rootScope) {
-          util.swap(3);
-          var header = {
-              title: '关于天易',
-              showBackButton: true,
-              backButtonIcon: 'arrow-l',
-              backButtonText: '返回',
-              url: '/more'
-          
-          };
-          $rootScope.header = header;
-          $scope.$on('$routeChangeSuccess', util.contentLoad);
-        }
-    }).when('/feedback', {
-        templateUrl: 'templates/other/feedback.html',
-        controller: function($scope, $rootScope) {
-          util.swap(3);
-          var header = {
-              title: '用户反馈',
-              showBackButton: true,
-              backButtonIcon: 'arrow-l',
-              backButtonText: '返回',
-              url: '/more'
-          };
-          $rootScope.header = header;
-          $scope.$on('$routeChangeSuccess', util.contentLoad);
-        }
-    });
+    ;
   }]);
   
   app.controller('CategoryCtrl', category.controller);
   
   app.controller('UserCtrl', function($scope) {
-    // $('#nav-bar-2').addClass('ui-btn-active');
     util.swap(2);
     $scope.$on('$routeChangeSuccess', util.contentLoad);
   });
   
   app.controller('MoreCtrl', function($scope, $rootScope) {
-    // $('#nav-bar-3').addClass('ui-btn-active');
     util.swap(3);
     var header = {
       title: '更多信息'

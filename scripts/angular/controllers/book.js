@@ -2,7 +2,7 @@ define(['util', 'skyex'], function(util, skyex) {
   var book = {};
 
   var page = 1, q = '';
- var resolves = {
+  var resolves = {
       books: {
         resolve: function($http, $route) {
           var params = {
