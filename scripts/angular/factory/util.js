@@ -14,6 +14,10 @@ define(function() {
           var listview = jQuery('ul[data-role=listview]');
           if (listview && listview.listview)
             listview.listview().listview('refresh');
+          var checkboxradio = jQuery("input[type='radio']");
+          if (checkboxradio && checkboxradio.checkboxradio) {
+            checkboxradio.checkboxradio("refresh");            
+          }
         }, 10);
         
         jQuery('div[data-role=header]').trigger('refresh');

@@ -99,7 +99,7 @@ define(function() {
           if (sessionToken) {
             requestData.append(sessionToken[0], sessionToken[1]);
           }
-          contentType = false;
+          contentType = "undefined";
           transformRequest = null;
           
         } else {

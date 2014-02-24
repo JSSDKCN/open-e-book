@@ -21,14 +21,12 @@
         </div>
         <div data-role="fieldcontain">
           <label for="verific_code"></label><img id="verific_code_image"
-            src="{{captcha}}" alt="验证码"><span
-            style="cursor: pointer; color: red; padding: 0px 0.4em;">点击图片刷新</span>
+            src="{{captcha}}" alt="验证码" ng-click="refresh()"><span
+            style="cursor: pointer; color: red; padding: 0px 0.4em;" ng-click="refresh()">点击图片刷新</span>
         </div>
         <div data-role="fieldcontain">
           <label for=""></label>
         </div>
-        <div class="ui-btn ui-input-btn ui-corner-all ui-shadow">
-          <a>注册</a>
-        </div>
+          <a data-role="button" ng-click="register()">注册</a>
       </form>
 

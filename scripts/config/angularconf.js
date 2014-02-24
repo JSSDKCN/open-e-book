@@ -1,9 +1,9 @@
 require.config({
     baseUrl: 'scripts',
     paths: {
-        angular: '../Library/angular/angular',
-        'angular-resource': '../Library/angular/angular-resource',
-        'angular-route': '../Library/angular/angular-route',
+        angular: '../Library/angular-1.2.13/angular',
+        'angular-resource': '../Library/angular-1.2.13/angular-resource',
+        'angular-route': '../Library/angular-1.2.13/angular-route',
         jQuery: '../Library/jquery-2.0.3',
         jQueryMobile: '../Library/jquery.mobile-1.4.0/jquery.mobile-1.4.0',
         bootstrap: 'bootstrap',

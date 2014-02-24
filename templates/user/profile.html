@@ -11,16 +11,18 @@
             <legend>邮箱：</legend>
             <div class="ui-controlgroup-controls ">
               <input name="email" id="email" type="email" data-inline="true" value="{{user.email}}"
-                class="ui-input-text-mid"> <a data-role="button" ng-click="verification()">验证</a>
+                class="ui-input-text-mid"> 
+                
+                <a data-role="button" ng-click="verification()" class="verification">验证</a>
             </div>
           </fieldset>
         </div>
         <div data-role="fieldcontain">
           <fieldset data-role="controlgroup" data-type="horizontal">
             <legend>性别：</legend>
-            <label for="male">男</label><input name="gender" id="male" type="radio" value="male"> <label
-              for="female">女</label><input name="gender" id="female" type="radio" value="female"> <label
-              for="hidden">保密</label><input name="gender" id="hidden" type="radio" value="hidden">
+            <label for="male">男</label><input name="gender" id="male" type="radio" value="male" ng-checked="{{user.gender == 'male'}}"> <label
+              for="female">女</label><input name="gender" id="female" type="radio" value="female" ng-checked="{{user.gender == 'female'}}"> <label
+              for="hidden">保密</label><input name="gender" id="hidden" type="radio" value="hidden" ng-checked="{{user.gender == 'hidden'}}">
           </fieldset>
         </div>
         <div>
