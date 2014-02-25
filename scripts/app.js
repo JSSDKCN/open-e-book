@@ -1,6 +1,7 @@
 define(["angular", "angular-resource", 'angular-route', 'skyex', 'category', 'util', 'navbar',
         'book', 'more', 'user'], function(angular,
     ngResource, ngRoute, skyex, category, util, navbar, book, more, user) {
+
   var app = angular.module("app", ["ngResource", 'ngRoute']);
   // you can do some more stuff here like calling app.factory()...
   'use strict';
@@ -36,24 +37,8 @@ define(["angular", "angular-resource", 'angular-route', 'skyex', 'category', 'ut
         resolve: book.resolves.none
     })
 
-    /*
-    // Category
-    .when('/category', {
-        templateUrl: 'templates/category/main.html',
-        controller: 'CategoryCtrl',
-        resolve: category.resolve
-    
-    }).when('/category/:id', {
-        templateUrl: 'templates/category/main.html',
-        controller: 'CategoryCtrl',
-        resolve: category.resolve
-    
-    })
-    */
     ;
   }]);
-  
-  app.controller('CategoryCtrl', category.controller);
 
   app.controller('HeaderCtrl', function($scope) {
     

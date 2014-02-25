@@ -2,7 +2,7 @@
   "name": "open-e-book",
   "version": "0.1.0",
   "description": "Open E-book project",
-  "homepage": "http://book.t1bao.com",
+  "homepage": "http://www.3gcnbeta.com",
   "repository": {
     "type": "git",
     "url": "https://github.com/calidion/open-e-book.git"
@@ -12,6 +12,7 @@
     "grunt": "~0.4.2",
     "grunt-contrib-cssmin": "~0.7.0",
     "grunt-contrib-htmlmin": "~0.1.3",
-    "grunt-contrib-requirejs": "~0.4.1"
+    "grunt-contrib-requirejs": "~0.4.1",
+    "grunt-inline-angular-templates": "~0.1.5"
   }
 }
