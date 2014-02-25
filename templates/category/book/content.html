@@ -19,5 +19,5 @@
       <a data-role="button" ng-click="download()">下载</a>
     </div></li>
   <li data-role="list-divider" style="text-align: center">目录</li>
-  <li ng-repeat="chapter in chapters"><a ng-href="#/book/{{book.id}}/chapter/{{chapter.id}}">{{chapter.title}}</a></li>
+  <li ng-repeat="chapter in chapters"><a ng-href="#/category/{{category.id}}/book/{{book.id}}/chapter/{{chapter.id}}">{{chapter.title}}</a></li>
 </ul>

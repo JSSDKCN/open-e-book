@@ -37,7 +37,7 @@ define(['jquery', 'skyex', 'req', 'dom'], function($, skyex, req, xdom) {
           
           list.listview();
           list.listview('refresh');
-        })
+        });
 
         // $('.wrapper').trigger('create');
       },

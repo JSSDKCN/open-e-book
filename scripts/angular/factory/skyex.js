@@ -14,7 +14,7 @@ define(function() {
       captchaUrl: function() {
         var id = this.session.get();
         if (!id) {
-          return this.requestUrl() + '/captcha';          
+          return this.requestUrl() + '/captcha';
         }
         return this.requestUrl() + '/captcha/' + id[1];
         
@@ -81,7 +81,7 @@ define(function() {
         
         var contentType = 'application/x-www-form-urlencoded';
         var transformRequest = function(obj) {
-          var str = [];
+          var str = new Array();
           for ( var p in obj)
             str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
           return str.join("&");
@@ -127,10 +127,19 @@ define(function() {
           self.box.showLimited('请求成功!');
           // this callback will be called asynchronously
           // when the response is available
-          console.log("request end");
-          console.log(response);
           self.session.update(response.data);
-          return callback(response.data);
+          if (response.status !== 0) {
+            
+            return callback(response.data);
+          }
+          if (response.info) {
+            self.box.showLimited(data.info);
+          }
+          if (response.message) {
+            self.box.showLimited(data.message);
+          }
+          return null;
+          
         });
       }
   };

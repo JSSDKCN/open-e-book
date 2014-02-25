@@ -8,7 +8,7 @@ define(function() {
     }, {
         'name': '分类',
         'id': 1,
-        'href': 'category',
+        'href': 'category/0',
         'icon': 'grid'
     }, {
         'name': '我的天易',

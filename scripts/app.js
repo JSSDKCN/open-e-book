@@ -26,6 +26,7 @@ define(["angular", "angular-resource", 'angular-route', 'skyex', 'category', 'ut
     moduleToRoutes(book, $routeProvider);
     moduleToRoutes(more, $routeProvider);
     moduleToRoutes(user, $routeProvider);
+    moduleToRoutes(category, $routeProvider);
     
     $routeProvider
     // Book
@@ -35,6 +36,7 @@ define(["angular", "angular-resource", 'angular-route', 'skyex', 'category', 'ut
         resolve: book.resolves.none
     })
 
+    /*
     // Category
     .when('/category', {
         templateUrl: 'templates/category/main.html',
@@ -46,7 +48,9 @@ define(["angular", "angular-resource", 'angular-route', 'skyex', 'category', 'ut
         controller: 'CategoryCtrl',
         resolve: category.resolve
     
-    });
+    })
+    */
+    ;
   }]);
   
   app.controller('CategoryCtrl', category.controller);

@@ -1,6 +1,6 @@
 
-<ul class="book_list" data-role="listview" data-insert="true">
-  <li ng-repeat="book in books"><a ng-href="#/book/content/{{book.id}}"> <img ng-src="{{parseImage(book.image_ids)}}" />
+<ul data-role="listview" data-insert="true">
+  <li ng-repeat="book in books"><a ng-href="#/category/{{category.id}}/book/{{book.id}}/content"> <img ng-src="{{parseImage(book.image_ids)}}" />
       <h3>{{book.name}}</h3>
       <p>
         <b>作者: {{book.author}}</b>

@@ -18,6 +18,7 @@ define(function() {
           if (checkboxradio && checkboxradio.checkboxradio) {
             checkboxradio.checkboxradio("refresh");            
           }
+          window.scrollTo(0, 0);
         }, 10);
         
         jQuery('div[data-role=header]').trigger('refresh');
