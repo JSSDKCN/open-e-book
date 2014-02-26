@@ -1,12 +1,14 @@
       <h3>
         尊敬的用户「<span style="color: red">{{user.username}}</span>」，欢迎您！
       </h3>
-      <ul data-role="listview">
-        <li><a href="#/user/profile">我的信息</a></li>
-        <li><a href="#/user/password/update">修改密码</a></li>
+      <ul class="list">
+        <li><a class="item" href="#/user/profile">我的信息</a></li>
+        <li><a class="item" href="#/user/password/update">修改密码</a></li>
         <!-- 
         <li><a href="#/user/book">我的书籍</a></li>
          -->
       </ul>
-      <br> <a data-role="button" ng-click="logout()">退 出</a>
+      <div class="padding">
+      <a class="button button-block button-positive" ng-click="logout()">退 出</a>
+      </div>
 

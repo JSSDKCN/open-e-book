@@ -1,0 +1,29 @@
+.about {
+	text-align: center;
+}
+
+b.num {
+	color: #F33;
+}
+
+pre {
+	white-space: pre-wrap;
+}
+
+.text {
+	word-break: break-all;
+}
+
+body {
+	font-size: 1em
+}
+
+.about p a {
+	text-decoration: none;
+}
+
+.item p {
+	height: 40px;
+	text-overflow: ellipsis;
+	white-space: normal
+}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="format-detection" content="telephone=no">
+<link rel="stylesheet" href="Library/ionic/styles/ionic.css">
+<link rel="stylesheet" href="styles/app.css">
+<script data-main="scripts/config/angularconf" src="Library/requirejs/require.js"></script>
+<title></title>
+</head>
+<body>
+  <div class="bar bar-header bar-calm">
+    <a class="button icon-left ion-chevron-left" ng-show="header.showBackButton"
+      ng-click="back()">{{header.backButtonText}}</a>
+    <h1 class="title">{{header.title}}</h1>
+    <button class="button icon ion-gear-a" ng-show="header.showAddBook">{{header.addBookText}}</button>
+  </div>
+  <div class="wrapper content has-header has-footer padding scroll-content" ng-view=""></div>
+  <div class="tabs  tabs-icon-top" ng-controller="NavBarCtrl">
+    <a class="tab-item" ng-repeat="navbar in navbars" message-id="{{navbar.id}}" id="nav-bar-{{navbar.id}}"
+      href="#/{{navbar.href}}"><i class="icon ion-{{navbar.icon}}"></i>{{navbar.name}}</a>
+  </div>
+</body>
+</html>

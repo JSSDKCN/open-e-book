@@ -19,7 +19,7 @@ define(function() {
         'name': '更多',
         'id': 3,
         'href': 'more',
-        'icon': 'gear'
+        'icon': 'more'
     }];
   }];
 });

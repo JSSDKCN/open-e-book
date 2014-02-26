@@ -285,7 +285,10 @@ define(
               return;
             page = 1;
             var header = {};
-            
+            $rootScope.back = function() {
+              console.log("inside more click");
+              $location.path('/user');
+            };
             switch (tempInfo.id) {
             case 1:
               header = {
@@ -404,7 +407,14 @@ define(
               break;
             case 6:
               header = {
-                title: '修改密码'
+                  title: '修改密码',
+                  showBackButton: true,
+                  backButtonIcon: 'arrow-l',
+                  backButtonText: '返回',
+              };
+              $rootScope.back = function() {
+                console.log("inside modify password");
+                $location.path('/user/home');
               };
               $scope.passwordUpdate = function() {
                 user.methods.password.update($http, $location);
@@ -413,10 +423,7 @@ define(
             }
             console.log('inside user ctrl');
             util.swap(2);
-            $rootScope.back = function() {
-              console.log("inside more click");
-              $location.path('/user');
-            };
+
             $rootScope.header = header;
             $rootScope.parseImage = util.parseUrl;
             $scope.$on('$routeChangeSuccess', util.contentLoad);
