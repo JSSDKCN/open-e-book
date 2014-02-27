@@ -1,7 +1,7 @@
 define(
     ['util', 'skyex'],
     function(util, skyex) {
-      var book = {};
+      var local = {};
       
       var cache = {
           book: {},
@@ -82,9 +82,9 @@ define(
           }
       };
       
-      book.resolves = resolves;
+      local.resolves = resolves;
       
-      book.controller = [
+      local.controller = [
           '$scope',
           '$route',
           '$location',
@@ -92,22 +92,17 @@ define(
           'resolve',
           function($scope, $route, $location, $rootScope, resolve) {
             var url = $route.current.templateUrl.substring(templateBase.length);
-            var tempInfo = book.templates[url];
+            var tempInfo = local.templates[url];
             if (!tempInfo)
               return;
             page = 1;
             var header = {};
             $rootScope.parseImage = util.parseUrl;
             $rootScope.back = function() {
-              $location.path('/book');
+              $location.path('/local/book');
             };
             switch (tempInfo.id) {
             case 1:
-              header = {
-                title: '我的书籍'
-              };
-              break;
-            case 2:
               header = {
                   title: '所有书籍',
                   showBackButton: true,
@@ -116,7 +111,7 @@ define(
               };
               $scope.books = resolve.data;
               break;
-            case 3:
+            case 2:
               header = {
                   title: '书籍详情',
                   showBackButton: true,
@@ -126,7 +121,7 @@ define(
               $scope.book = cache.book[$route.current.params.id];
               $scope.chapters = resolve.data;
               $rootScope.back = function() {
-                $location.path('/book/all');
+                $location.path('/local/book/all');
               };
               $scope.download = function() {
                 console.log("inside download");
@@ -136,7 +131,7 @@ define(
                 console.log($scope.selectedItem);
               };
               break;
-            case 4:
+            case 3:
               header = {
                   title: cache.book[$route.current.params.id].name,
                   showBackButton: true,
@@ -144,7 +139,7 @@ define(
                   backButtonText: '返回'
               };
               $rootScope.back = function() {
-                $location.path('/book/content/' + $route.current.params.id);
+                $location.path('/local/book/content/' + $route.current.params.id);
               };
               $scope.chapter = resolve.data[0];
               if (cache.content[$route.current.params.id].length > resolve.data[0].order) {
@@ -155,7 +150,7 @@ define(
               $scope.nextChapter = function() {
                 if (cache.content[$route.current.params.id].data.length > resolve.data[0].order) {
                   $location
-                      .path('/book/'
+                      .path('/local/book/'
                           + $route.current.params.id
                           + '/chapter/'
                           + cache.content[$route.current.params.id].data[resolve.data[0].order].id);
@@ -167,33 +162,28 @@ define(
             
             $rootScope.header = header;
             
-            // $scope.books = $injector.get('books');
+            // $scope.books = $injector.get('locals');
             
             //
             $scope.$on('$routeChangeSuccess', util.contentLoad);
           }];
-      book.templates = {
-          'book/main.html': {
+      local.templates = {
+          'local/book/list.html': {
               id: 1,
-              url: '/book',
-              resolve: resolves.none
+              url: '/local/book',
+              resolve: resolves.books
           
           },
-          'book/all.html': {
+          'local/book/content.html': {
               id: 2,
-              url: '/book/all',
-              resolve: resolves.books
-          },
-          'book/content.html': {
-              id: 3,
-              url: '/book/content/:id',
+              url: '/local/book/content/:id',
               resolve: resolves.contents
           },
-          'book/chapter.html': {
-              id: 4,
-              url: '/book/:id/chapter/:cid',
+          'local/book/chapter.html': {
+              id: 3,
+              url: '/local/book/:id/chapter/:cid',
               resolve: resolves.chapter
           }
       };
-      return book;
+      return local;
     });

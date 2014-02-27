@@ -1,0 +1,23 @@
+
+<ul data-role="listview">
+  <li data-role="list-divider" style="text-align: center;">简介</li>
+  <li><div data-role="fieldcontain">
+      <img ng-src="{{parseImage(book.image_ids)}}"
+        style="width: 84px; height: 100px; float: left; margin: 0.4em; padding: 0.3em;"><b
+        style="color: red; margin: 0.5em; padding: 0.3em;">《{{book.name}}》</b><br> <span
+        style="margin: 0.6em; padding: 0.3em;">作者: <i>{{book.author}}</i></span><br>
+      <p style="margin: 0.4em; padding: 0.3em;">{{book.intro}}</p>
+    </div> <!-- 
+    <div>
+      <select data-role="flipswitch" ng-model="selectedItem" ng-change="change()">
+        <option value="0">取消</option>
+        <option value="1">订阅</option>
+      </select>
+    </div>
+     --></li>
+  <li><div>
+      <a data-role="button" ng-click="download()">下载</a>
+    </div></li>
+  <li data-role="list-divider" style="text-align: center">目录</li>
+  <li ng-repeat="chapter in chapters"><a ng-href="#/book/{{book.id}}/chapter/{{chapter.id}}">{{chapter.title}}</a></li>
+</ul>

@@ -1,0 +1,32 @@
+      <form method="post">
+        <div data-role="fieldcontain">
+          <label for="username">用户名：</label> <input name="username" id="username" maxlength="20" type="text"
+            placeholder="由4-20位中英文、数字组成">
+        </div>
+        <div data-role="fieldcontain">
+          <label for="password">密码:</label> <input name="password" id="password" maxlength="20" type="password"
+            placeholder="由6-20位字母、数字或符号组成">
+        </div>
+        <div data-role="fieldcontain">
+          <label for="password2">确认密码:</label> <input name="password2" id="password2" maxlength="20" type="password"
+            placeholder="请再次输入密码">
+        </div>
+        <div data-role="fieldcontain">
+          <label for="email">邮箱:</label> <input name="email" id="email" maxlength="20" type="text"
+            placeholder="请输入常用邮箱，用来找回密码">
+        </div>
+        <div data-role="fieldcontain">
+          <label for="verific_code">验证码：</label> <input name="captcha" type="text" placeholder="请输入验证码"
+            id="verific_code">
+        </div>
+        <div data-role="fieldcontain">
+          <label for="verific_code"></label><img id="verific_code_image"
+            src="{{captcha}}" alt="验证码" ng-click="refresh()"><span
+            style="cursor: pointer; color: red; padding: 0px 0.4em;" ng-click="refresh()">点击图片刷新</span>
+        </div>
+        <div data-role="fieldcontain">
+          <label for=""></label>
+        </div>
+          <a data-role="button" ng-click="register()">注册</a>
+      </form>
+

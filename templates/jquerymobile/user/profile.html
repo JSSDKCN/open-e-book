@@ -1,0 +1,31 @@
+      <form method="post">
+        <div data-role="fieldcontain">
+          <label for="username">用户名：</label> <input name="username" id="username" type="text"
+            placeholder="由6-20位字母、数字或符号组成" value="{{user.username}}">
+        </div>
+        <div data-role="fieldcontain">
+          <label for="mobile">手机号：</label> <input name="mobile" id="mobile" type="text" maxlength="11" value="{{user.mobile}}">
+        </div>
+        <div data-role="fieldcontain">
+          <fieldset data-role="controlgroup">
+            <legend>邮箱：</legend>
+            <div class="ui-controlgroup-controls ">
+              <input name="email" id="email" type="email" data-inline="true" value="{{user.email}}"
+                class="ui-input-text-mid"> 
+                
+                <a data-role="button" ng-click="verification()" class="verification">验证</a>
+            </div>
+          </fieldset>
+        </div>
+        <div data-role="fieldcontain">
+          <fieldset data-role="controlgroup" data-type="horizontal">
+            <legend>性别：</legend>
+            <label for="male">男</label><input name="gender" id="male" type="radio" value="male" ng-checked="{{user.gender == 'male'}}"> <label
+              for="female">女</label><input name="gender" id="female" type="radio" value="female" ng-checked="{{user.gender == 'female'}}"> <label
+              for="hidden">保密</label><input name="gender" id="hidden" type="radio" value="hidden" ng-checked="{{user.gender == 'hidden'}}">
+          </fieldset>
+        </div>
+        <div>
+          <a data-role="button" ng-click="updateProfile()">确 定</a>
+        </div>
+      </form>

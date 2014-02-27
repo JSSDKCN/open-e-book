@@ -1,0 +1,11 @@
+
+<ul class="book_list" data-role="listview" data-insert="true">
+  <li ng-repeat="book in books"><a ng-href="#/local/book/content/{{book.id}}"> <img ng-src="{{parseImage(book.image_ids)}}" />
+      <h3>{{book.name}}</h3>
+      <p>
+        <b>作者: {{book.author}}</b>
+      </p>
+      <p>{{book.intro}}</p>
+  </a></li>
+  <li data-icon="false"><a id="more" style="text-align: center;" ng-click="click()">显示更多...</a></li>
+</ul>

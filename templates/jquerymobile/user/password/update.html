@@ -1,0 +1,22 @@
+
+      <form method="post" ng-submit="passwordUpdate()">
+        <div data-role="fieldcontain">
+          <label for="old_pass">旧密码：</label>
+          
+            <input name="old_pass" id="old_pass" type="password" placeholder="请输入您的旧密码">
+
+        </div>
+        <div data-role="fieldcontain">
+          <label for="new_pass">新密码：</label>
+          
+            <input name="new_pass" id="new_pass" type="password" placeholder="由6-20位字母、数字或符号组成">
+
+        </div>
+        <div data-role="fieldcontain">
+          <label for="new_pass2">确认密码：</label>
+          
+            <input name="new_pass2" id="new_pass2" type="password" placeholder="由6-20位字母、数字或符号组成">
+
+        </div>
+          <a data-role="button" ng-click="passwordUpdate()">确 定</a>
+      </form>

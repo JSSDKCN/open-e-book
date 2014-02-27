@@ -1,0 +1,14 @@
+
+<ul data-role="listview">
+  <li data-role="list-divider" style="text-align: center;">简介</li>
+  <li><div data-role="fieldcontain">
+      <img ng-src="{{parseImage(book.image_ids)}}"
+        style="width: 84px; height: 100px; float: left; margin: 0.4em; padding: 0.3em;"><b
+        style="color: red; margin: 0.5em; padding: 0.3em;">《{{book.name}}》</b><br> <span
+        style="margin: 0.6em; padding: 0.3em;">作者: <i>{{book.author}}</i></span><br>
+      <p style="margin: 0.4em; padding: 0.3em;">{{book.intro}}</p>
+    </div></li>
+
+  <li data-role="list-divider" style="text-align: center">目录</li>
+  <li ng-repeat="chapter in chapters"><a ng-href="#/local/book/{{book.id}}/chapter/{{chapter.id}}">{{chapter.title}}</a></li>
+</ul>
