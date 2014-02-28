@@ -1,4 +1,3 @@
-<scroll>
 <form method="post">
   <label class="item item-input"> <span class="input-label">用户名：</span> <input name="username" id="username"
     type="text" placeholder="由6-20位字母、数字或符号组成" value="{{user.username}}">
@@ -8,12 +7,11 @@
     type="email" data-inline="true" value="{{user.email}}"><a class="button button-danger"
     ng-click="verification()" class="verification">验证</a>
   </label> <label class="item item-input"> <span class="input-label">性别：</span> 男<input name="gender" id="male"
-    type="radio" class="button" value="male" ng-checked="{{user.gender == 'male'}}"> 女<input name="gender"
-    id="female" type="radio" class="button" value="female" ng-checked="{{user.gender == 'female'}}"> 保密<input
-    name="gender" id="hidden" type="radio" class="button" value="hidden" ng-checked="{{user.gender == 'hidden'}}">
+    type="radio" value="male" ng-checked="{{user.gender == 'male'}}"> 女<input name="gender"
+    id="female" type="radio"value="female" ng-checked="{{user.gender == 'female'}}"> 保密<input
+    name="gender" id="hidden" type="radio" value="hidden" ng-checked="{{user.gender == 'hidden'}}">
   </label>
   <div class="padding">
     <a class="button button-block button-positive" ng-click="updateProfile()">确 定</a>
   </div>
 </form>
-</scroll>
