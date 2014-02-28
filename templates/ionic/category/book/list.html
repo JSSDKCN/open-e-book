@@ -1,6 +1,6 @@
-
+<scroll>
 <div data-role="listview" data-insert="true" class="list">
-<!-- 
+  <!-- 
   <li ng-repeat="book in books"><a ng-href="#/category/{{category.id}}/book/{{book.id}}/content"> <img ng-src="{{parseImage(book.image_ids)}}" />
       <h3>{{book.name}}</h3>
       <p>
@@ -8,11 +8,16 @@
       </p>
       <p>{{book.intro}}</p>
   </a></li>
- -->  
-      <a class="item item-thumbnail-left" ng-href="#/category/{{category.id}}/book/{{book.id}}/content" ng-repeat="book in books">
-      <img ng-src="{{parseImage(book.image_ids)}}" >
-      <h2>《{{book.name}}》&nbsp;<i>作者: {{book.author}}</i></h2>
-      <p class="lines">{{book.intro}}</p>
-    </a>
-  <div class="padding"><a class="button button-block button-positive" style="text-align: center;" ng-click="more()">显示更多...</a></div>
+ -->
+  <a class="item item-thumbnail-left" ng-href="#/category/{{category.id}}/book/{{book.id}}/content"
+    ng-repeat="book in books"> <img ng-src="{{parseImage(book.image_ids)}}">
+    <h2>
+      《{{book.name}}》&nbsp;<i>作者: {{book.author}}</i>
+    </h2>
+    <p class="lines">{{book.intro}}</p>
+  </a>
+  <div class="padding">
+    <a class="button button-block button-positive" style="text-align: center;" ng-click="more()">显示更多...</a>
+  </div>
 </div>
+</scroll>

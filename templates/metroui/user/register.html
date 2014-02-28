@@ -1,0 +1,20 @@
+
+<div class="list">
+  <label class="item item-input"> <span class="input-label">用户名：</span> <input name="username" id="username"
+    maxlength="20" type="text" placeholder="由4-20位中英文、数字组成">
+  </label> <label class="item item-input"> <span class="input-label">密码:</span> <input name="password" id="password"
+    maxlength="20" type="password" placeholder="由6-20位字母、数字或符号组成">
+  </label> <label class="item item-input"> <span class="input-label">确认密码:</span> <input name="password2" id="password2"
+    maxlength="20" type="password" placeholder="请再次输入密码">
+  </label> <label class="item item-input"> <span class="input-label">邮箱:</span> <input name="email" id="email"
+    maxlength="20" type="text" placeholder="请输入常用邮箱，用来找回密码">
+  </label> <label class="item item-input"> <span class="input-label">验证码：</span> <input name="captcha" type="text"
+    placeholder="请输入下方的验证码" id="verific_code">
+  </label> <label class="item item-input"> <span class="input-label"></span><img id="verific_code_image"
+    ng-src="{{captcha}}" alt="验证码" ng-click="refresh()"><span
+    style="cursor: pointer; color: red; padding: 0px 0.4em;" ng-click="refresh()">点击图片刷新</span>
+  </label>
+  <div class="padding">
+    <a class="button button-block button-positive" ng-click="register()">注册</a>
+  </div>
+</div>

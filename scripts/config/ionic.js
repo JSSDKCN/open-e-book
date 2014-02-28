@@ -37,6 +37,7 @@ require.config({
         more: 'controllers/more',
         user: 'controllers/user',
         local: 'controllers/local',
+        body: 'controllers/body',
         
     
     },
@@ -68,3 +69,4 @@ require.config({
 });
 
 window.templateBase = "templates/ionic/";
+window.angularModules = ['ionic', 'ngResource', 'ngRoute'];

@@ -12,15 +12,12 @@
 <title></title>
 </head>
 <body>
-  <div class="bar bar-header bar-calm">
+  <div class="bar bar-header bar-calm" ngx-controller="HeaderBarCtrl">
     <a class="button icon-left ion-chevron-left" ng-show="header.showBackButton" ng-click="back()">{{header.backButtonText}}</a>
     <h1 class="title">{{header.title}}</h1>
     <button class="button icon ion-gear-a" ng-show="header.showAddBook">{{header.addBookText}}</button>
   </div>
-  <ion-scroll>
-  <div
-    class="wrapper content has-header has-footer padding scroll-content" ng-view=""></div>
-  </ion-scroll>
+  <div class="wrapper content has-header has-footer padding scroll-content" ng-view=""></div>
   <div class="tabs  tabs-icon-top" ng-controller="NavBarCtrl">
     <a class="tab-item" ng-repeat="navbar in navbars" message-id="{{navbar.id}}" id="nav-bar-{{navbar.id}}"
       href="#/{{navbar.href}}"><i class="icon ion-{{navbar.icon}}"></i>{{navbar.name}}</a>

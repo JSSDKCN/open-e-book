@@ -1,0 +1,30 @@
+<div class="list">
+  <div class="item item-divider text-center">简介</div>
+  <div class="item item-thumbnail-left" href="#">
+    <img ng-src="{{parseImage(book.image_ids)}}" />
+    <h2>
+      《{{book.name}}》 <span style="margin: 0.6em; padding: 0.3em;">作者: <i>{{book.author}}</i></span>
+    </h2>
+    <p>{{book.intro}}</p>
+  </div>
+  <!-- 
+    <div>
+      <select data-role="flipswitch" ng-model="selectedItem" ng-change="change()">
+        <option value="0">取消</option>
+        <option value="1">订阅</option>
+      </select>
+    </div>
+     -->
+  <div class="item item-toggle">
+    订阅 <label class="toggle"> <input type="checkbox" ng-click="subscribe()">
+      <div class="track">
+        <div class="handle"></div>
+      </div>
+    </label>
+  </div>
+  <div class="padding">
+    <a class="button button-block button-positive" ng-click="download()">下载</a>
+  </div>
+  <div class="item item-divider text-center">目录</div>
+  <a class="item" ng-repeat="chapter in chapters" ng-href="#/book/{{book.id}}/chapter/{{chapter.id}}">{{chapter.title}}</a>
+</div>

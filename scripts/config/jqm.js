@@ -66,3 +66,4 @@ require.config({
 });
 
 window.templateBase = "templates/jquerymobile/";
+window.angularModules = ['ngResource', 'ngRoute'];

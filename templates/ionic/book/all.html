@@ -1,3 +1,4 @@
+<scroll>
 <div data-role="listview" data-insert="true" class="list">
       <a class="item item-thumbnail-left" ng-href="#/book/content/{{book.id}}" ng-repeat="book in books">
       <img ng-src="{{parseImage(book.image_ids)}}" >
@@ -6,3 +7,4 @@
     </a>
   <div class="padding"><a class="button button-block button-positive" style="text-align: center;" ng-click="more()">显示更多...</a></div>
 </div>
+</scroll>

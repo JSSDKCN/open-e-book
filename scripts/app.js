@@ -2,7 +2,7 @@ define(["angular", "angular-resource", 'angular-route', 'skyex', 'category', 'ut
         'book', 'more', 'user', 'local'], function(angular,
     ngResource, ngRoute, skyex, category, util, navbar, book, more, user, local) {
 
-  var app = angular.module("app", ["ngResource", 'ngRoute']);
+  var app = angular.module("app", angularModules);
   // you can do some more stuff here like calling app.factory()...
   'use strict';
   //Factories
