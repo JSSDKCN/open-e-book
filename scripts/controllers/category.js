@@ -1,23 +1,6 @@
 define(['util', 'skyex'], function(util, skyex) {
   var category = {};
-  var pids = new Array();
-  
-  var cache = {
-      book: {},
-      sub: {
 
-      },
-      category: {
-
-      },
-      content: {
-
-      },
-      chapter: {
-        
-      }
-  };
-  
   var page = 1;
   
   var resolves = {
@@ -27,111 +10,23 @@ define(['util', 'skyex'], function(util, skyex) {
         }
       },
       chapters: {
-        resolve: function($http, $route) {
-          if (!parseInt($route.current.params.cid)) {
-            return null;
-          }
-          var params = {
-              type: 'book',
-              act: 'chapter',
-              id: $route.current.params.cid
-          };
-          return skyex.post($http, params, function(response) {
-            for (var i = 0; i < response.data.length; i++) {
-              var chapter = response.data[i];
-              cache.chapter[chapter.id] = chapter;
-            }
-            return response;
-          });
+        resolve: function($http, $route, bookFactory) {
+          return bookFactory.chapter($route.current.params.cid);
         }
       },
       contents: {
-        resolve: function($http, $route) {
-          var id = $route.current.params.bid;
-          console.log('id = ' + id);
-          if (!parseInt(id)) {
-            return null;
-          }
-          console.log(cache.content);
-          if (cache.content[id]) {
-            return cache.content[id];
-          }
-          var params = {
-              type: 'book',
-              act: 'info',
-              id: id
-          };
-          return skyex.post($http, params, function(response) {
-            if (response.data && response.data.length) {
-              cache.content[id] = response;
-            }
-            return response;
-          });
+        resolve: function($http, $route, bookFactory) {
+          return bookFactory.content($route.current.params.bid);
         }
       },
       books: {
-        resolve: function($http, $route, $location) {
-          if (!parseInt($route.current.params.id)) {
-            return null;
-          }
-          var params = {
-              type: 'book',
-              act: 'list',
-              id: $route.current.params.id,
-              page: page
-          };
-          return skyex.post($http, params, function(response) {
-            for (var i = 0; i < response.data.length; i++) {
-              var book = response.data[i];
-              cache.book[book.id] = book;
-            }
-            return response;
-          });
+        resolve: function($http, $route, bookFactory) {
+          return bookFactory.category.book($route.current.params.id, page);
         }
       },
       categories: {
-        resolve: function($http, $route, $location) {
-          var pid = $route.current.params.id ? $route.current.params.id : 0;
-          var params = {
-              type: 'category',
-              id: pid
-          };
-          console.log(pid);
-          
-          console.log(pids);
-          if (cache.sub[pid]) {
-            
-            if (pid == 0) {
-              pids = ['0'];
-            } else {
-              pids.push(pid);
-            }
-            return cache.sub[pid];
-          }
-          
-          return skyex.post($http, params, function(response) {
-            console.log('inside resolve category');
-            
-            if (!response.data.length) {
-              console.log('inside no sub category found');
-              $location.path('/category/' + pid + '/book');
-              return;
-            }
-            cache.sub[pid] = response;
-            if (pid == 0) {
-              pids = [0];
-            } else {
-              pids.push(pid);
-            }
-            for (var i = 0; i < response.data.length; i++) {
-              var categroy = response.data[i];
-              cache.category[categroy.id] = categroy;
-            }
-            
-            console.log(response.data);
-            
-            return response;
-          });
+        resolve: function($http, $route, $location, bookFactory) {
+          return bookFactory.category.list($route.current.params.id, $location);
         }
       }
   };
@@ -139,7 +34,9 @@ define(['util', 'skyex'], function(util, skyex) {
   category.resolves = resolves;
   
   category.controller = ['$scope', '$route', '$rootScope', '$location',
-      'resolve', function($scope, $route, $rootScope, $location, resolve) {
+      'resolve', 'bookFactory', function($scope, $route, $rootScope, $location, resolve, bookFactory) {
+    var pids = bookFactory.pids;
+    var cache = bookFactory.cache;
     var url = $route.current.templateUrl.substring(templateBase.length);
     var tempInfo = category.templates[url];
         if (!tempInfo)
@@ -265,10 +162,6 @@ define(['util', 'skyex'], function(util, skyex) {
           };
           $scope.nextChapter = function() {
             var book = cache.content[parseInt($route.current.params.bid)];
-            console.log('category next chapter');
-            console.log(resolve.data);
-            console.log(cache.content);
-            console.log([$route.current.params.bid]);
             
             if (book.data.length > resolve.data[0].order) {
               $location

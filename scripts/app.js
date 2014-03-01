@@ -1,12 +1,13 @@
 define(["angular", "angular-resource", 'angular-route', 'skyex', 'category', 'util', 'navbar',
-        'book', 'more', 'user', 'local'], function(angular,
-    ngResource, ngRoute, skyex, category, util, navbar, book, more, user, local) {
+        'book', 'more', 'user', 'local', 'bookFactory'], function(angular,
+    ngResource, ngRoute, skyex, category, util, navbar, book, more, user, local, bookFactory) {
 
   var app = angular.module("app", angularModules);
   // you can do some more stuff here like calling app.factory()...
   'use strict';
   //Factories
   app.factory('skyex', ['$http', skyex]);
+  app.factory('bookFactory', bookFactory);
   // Config $routeProvider
   templateBase = templateBase || "templates/";
   console.log(templateBase);
@@ -46,6 +47,8 @@ define(["angular", "angular-resource", 'angular-route', 'skyex', 'category', 'ut
 
     ;
   }]);
+  
+  
 
   app.controller('HeaderCtrl', function($scope) {
     

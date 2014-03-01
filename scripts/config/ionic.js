@@ -39,6 +39,10 @@ require.config({
         local: 'controllers/local',
         body: 'controllers/body',
         
+        //Agnular Factory
+        bookFactory: 'factory/book',
+        //categoryFactory: 'factory/category'
+        
     
     },
     shim: {

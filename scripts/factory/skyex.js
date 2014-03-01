@@ -1,6 +1,7 @@
 define(function() {
   
   return {
+      cache: {},
       domain: function() {
         return 'book.t1bao.com';
         // return location.hostname ? location.hostname : 'book.t1bao.com';
@@ -103,6 +104,10 @@ define(function() {
           transformRequest = null;
           
         } else {
+          if (this.cache[JSON.stringify(requestData)]) {
+            return callback(this.cache[JSON.stringify(requestData)]);
+          }
+          
           if (sessionToken) {
             requestData[sessionToken[0]] = sessionToken[1];
           }
@@ -129,7 +134,7 @@ define(function() {
           // when the response is available
           self.session.update(response.data);
           if (response.status !== 0) {
-            
+            self.cache[JSON.stringify(requestData)] = response.data;
             return callback(response.data);
           }
           if (response.info) {

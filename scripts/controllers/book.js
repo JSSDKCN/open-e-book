@@ -2,77 +2,21 @@ define(
     ['util', 'skyex'],
     function(util, skyex) {
       var book = {};
-      
-      var cache = {
-          book: {},
-          page: {},
-          content: {},
-          chapter: {}
-      };
-      
       var page = 1, q = '';
       var resolves = {
           chapter: {
-            resolve: function($http, $route) {
-              if (!parseInt($route.current.params.cid)) {
-                return null;
-              }
-              var params = {
-                  type: 'book',
-                  act: 'chapter',
-                  id: $route.current.params.cid
-              };
-              return skyex.post($http, params, function(response) {
-                for (var i = 0; i < response.data.length; i++) {
-                  var chapter = response.data[i];
-                  cache.chapter[chapter.id] = chapter;
-                }
-                return response;
-              });
+            resolve: function($http, $route, bookFactory) {
+              return bookFactory.chapter($route.current.params.cid);
             }
           },
           books: {
-            resolve: function($http, $route) {
-              p = page;
-              var params = {
-                  type: 'book',
-                  act: 'search',
-                  page: page,
-                  q: q
-              };
-              if (cache.page[p]) {
-                return cache.page[p];
-              }
-              return skyex.post($http, params, function(response) {
-                cache.page[p] = response;
-                for (var i = 0; i < response.data.length; i++) {
-                  var book = response.data[i];
-                  cache.book[book.id] = book;
-                }
-                console.log(cache.book);
-                return response;
-              });
+            resolve: function($http, $route, bookFactory) {
+              return bookFactory.search(q, page);
             },
           },
           contents: {
-            resolve: function($http, $route) {
-              if (!parseInt($route.current.params.id)) {
-                return null;
-              }
-              if (cache.content[$route.current.params.id]) {
-                return cache.content[$route.current.params.id];
-              }
-              var params = {
-                  type: 'book',
-                  act: 'info',
-                  id: $route.current.params.id
-              };
-              return skyex.post($http, params, function(response) {
-                if (response.data && response.data.length) {
-                  cache.content[$route.current.params.id] = response;
-                }
-                return response;
-              });
+            resolve: function($http, $route, bookFactory) {
+              return bookFactory.content($route.current.params.id);
             }
           },
           none: {
@@ -89,8 +33,11 @@ define(
           '$route',
           '$location',
           '$rootScope',
+          'bookFactory',
           'resolve',
-          function($scope, $route, $location, $rootScope, resolve) {
+          function($scope, $route, $location, $rootScope, bookFactory, resolve) {
+            console.log(bookFactory);
+            var cache = bookFactory.cache;
             var url = $route.current.templateUrl.substring(templateBase.length);
             var tempInfo = book.templates[url];
             if (!tempInfo)
@@ -166,10 +113,6 @@ define(
             util.swap(0);
             
             $rootScope.header = header;
-            
-            // $scope.books = $injector.get('books');
-            
-            //
             $scope.$on('$routeChangeSuccess', util.contentLoad);
           }];
       book.templates = {
@@ -177,7 +120,6 @@ define(
               id: 1,
               url: '/book',
               resolve: resolves.none
-          
           },
           'book/all.html': {
               id: 2,

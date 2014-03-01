@@ -4,11 +4,11 @@
   </label> <label class="item item-input"> <span class="input-label">手机号：</span> <input name="mobile" id="mobile"
     type="text" maxlength="11" value="{{user.mobile}}">
   </label> <label class="item item-input"> <span class="input-label">邮箱：</span> <input name="email" id="email"
-    type="email" data-inline="true" value="{{user.email}}"><a class="button button-danger"
+    type="email" data-inline="true" value="{{user.email}}"><a class="button button-assertive"
     ng-click="verification()" class="verification">验证</a>
   </label> <label class="item item-input"> <span class="input-label">性别：</span> 男<input name="gender" id="male"
     type="radio" value="male" ng-checked="{{user.gender == 'male'}}"> 女<input name="gender"
-    id="female" type="radio"value="female" ng-checked="{{user.gender == 'female'}}"> 保密<input
+    id="female" type="radio" value="female" ng-checked="{{user.gender == 'female'}}"> 保密<input
     name="gender" id="hidden" type="radio" value="hidden" ng-checked="{{user.gender == 'hidden'}}">
   </label>
   <div class="padding">

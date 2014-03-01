@@ -27,3 +27,12 @@ body {
 	text-overflow: ellipsis;
 	white-space: normal
 }
+
+#male,#female,#hidden {
+	-webkit-flex: none;
+	flex: none;
+	width: 30px;
+	-webkit-appearance: radio;
+	-moz-appearance: radio;
+	appearance: radio;
+}
