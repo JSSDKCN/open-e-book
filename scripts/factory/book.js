@@ -31,7 +31,7 @@ define(['skyex'], function(skyex) {
     });
   };
   
-  book.category.book = function(id, page) {
+  book.category.book = function(id, page, callback) {
     if (!parseInt(id)) {
       return null;
     }
@@ -45,6 +45,9 @@ define(['skyex'], function(skyex) {
       for (var i = 0; i < response.data.length; i++) {
         var book = response.data[i];
         cache.book[book.id] = book;
+      }
+      if (callback) {
+        callback(response);
       }
       return response;
     });

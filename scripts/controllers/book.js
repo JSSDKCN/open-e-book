@@ -42,8 +42,8 @@ define(
             var tempInfo = book.templates[url];
             if (!tempInfo)
               return;
-            page = 1;
             var header = {};
+            page = 1;
             $rootScope.parseImage = util.parseUrl;
             $rootScope.back = function() {
               $location.path('/book');
@@ -62,6 +62,20 @@ define(
                   backButtonText: '返回'
               };
               $scope.books = resolve.data;
+              $scope.more = function() {
+                console.log('more ... ');
+                console.log(page);
+                page = page + 1;
+                bookFactory.search(q, page, function(response) {
+                  console.log('more end ..');
+                  console.log(response);
+                  if (response.data.length) {
+                    $('#more').remove();
+                  } else {
+                    $scope.$apply();
+                  }
+                });
+              };
               break;
             case 3:
               header = {
