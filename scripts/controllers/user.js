@@ -2,10 +2,6 @@ define(
     ['util', 'skyex'],
     function(util, skyex) {
       var user = {};
-      user.tags = {
-          logout: false,
-          url: null
-      };
       
       var resolves = {
         none: {
@@ -14,32 +10,13 @@ define(
           }
         }
       };
-      
       user.methods = {
-          mail: {
-            verfiy: function($http, $location, callback) {
-              if (user.profile && !parseInt(user.profile.is_email_validated)) {
-                var params = {
-                    type: 'user',
-                    act: 'email_verification'
-                };
-                skyex.post($http, params, function(data) {
-                  switch (data.status) {
-                  case 1:
-                    alert(data.message);
-                    // $('.verification').attr('disabled', true);
-                    $('.verification').html('验证中...');
-                    break;
-                  }
-                });
-              }
-            }
-          },
-          update: function($http, $location, callback) {
+          update: function(userFactory) {
             var username = $('input[name=username]').val();
             var mobile = $('#mobile').val();
             var email = $('input[name=email]').val();
-            var gender = $('input[name=gender').val();
+            var gender = $('input[name=gender]:checked').val();
+            console.log($('input[name=gender]:checked'));
             if (!username) {
               alert("请输入用户名!");
               return false;
@@ -55,52 +32,18 @@ define(
               alert("输入电子邮箱格式不正确!");
               return false;
             }
-            
-            var params = {
-                type: 'user',
-                act: 'update',
-                username: username,
-                mobile: mobile,
-                email: email,
-                gender: gender
-            };
-            
-            skyex.post($http, params, function(response) {
-              switch (response.status) {
-              case 1:
-                alert(response.message);
-                user.profile.username = username;
-                user.profile.mobile = mobile;
-                user.profile.email = email;
-                user.profile.gender = gender;
-                break;
-              }
-            });
+            userFactory.update(username, mobile, email, gender);
           },
           password: {
-              retrieve: function($http, $location) {
+              retrieve: function(userFactory) {
                 var email = $('input[name=email]').val();
                 if (!email) {
                   alert("请输入邮箱!");
                   return false;
                 }
-                var params = {
-                    type: 'user',
-                    act: 'password_retreive',
-                    email: email
-                };
-                skyex.post($http, params, function(data) {
-                  switch (data.status) {
-                  case 1:
-                    alert(data.message);
-                    $location.path('/user');
-                    break;
-                  case 2:
-                    alert(data.message, 2);
-                  }
-                });
+                userFactory.password.retrieve(email);
               },
-              update: function($http, $location) {
+              update: function(userFactory) {
                 var old_pass = $('input[name=old_pass]').val();
                 var new_pass = $('input[name=new_pass]').val();
                 var new_pass2 = $('input[name=new_pass2]').val();
@@ -127,78 +70,11 @@ define(
                   alert("尼玛，二次输入密码一致的，想玩我啊！!");
                   return false;
                 }
-                var params = {
-                    type: 'user',
-                    act: 'password_update',
-                    old_pass: old_pass,
-                    new_pass: new_pass,
-                    new_pass2: new_pass2
-                };
-                skyex.post($http, params, function(response) {
-                  switch (response.status) {
-                  case 0:
-                    alert(response.message);
-                    break;
-                  case 1:
-                    alert(response.message);
-                    $location.path('/user/home');
-                    break;
-                  }
-                });
+                userFactory.password.update(old_pass, new_pass);
                 return false;
               }
           },
-          logout: function($http, $location, callback) {
-            var params = {
-                type: 'user',
-                act: 'logout'
-            };
-            skyex.post($http, params, function(data) {
-              switch (data.status) {
-              case 1:
-                user.logout = true;
-                user.profile = null;
-                if (!callback) {
-                  $location.path('/user');
-                } else {
-                  callback();
-                }
-                break;
-              default:
-
-              }
-            });
-          },
-          login: function() {
-            
-          },
-          profile: function($http, $location, callback) {
-            if (user.profile) {
-              if (!callback) {
-                $location.path('/user/home');
-              } else {
-                callback();
-              }
-              return;
-            }
-            var params = {
-                type: 'user',
-                act: 'profile'
-            };
-            skyex.post($http, params, function(response) {
-              switch (response.status) {
-              case 1:
-                user.profile = response.data;
-                if (!callback) {
-                  $location.path('/user/home');
-                } else {
-                  callback();
-                }
-                break;
-              }
-            });
-          },
-          register: function($http, $location, callback) {
+          register: function(userFactory) {
             var username = $('input[name=username]').val();
             var password = $('input[name=password]').val();
             var password2 = $('input[name=password2]').val();
@@ -247,26 +123,8 @@ define(
               return false;
             }
             
-            var params = {
-                type: 'user',
-                act: 'register',
-                username: username,
-                password: password,
-                password2: password2,
-                email: email,
-                captcha: captcha
-            };
             
-            skyex.post($http, params, function(data) {
-              switch (data.status) {
-              case 1:
-                alert(data.message);
-                if (!callback) {
-                  $location.path('/user');
-                }
-                break;
-              }
-            });
+            userFactory.register(username, password, email, captcha);
           }
       };
       
@@ -279,13 +137,16 @@ define(
           '$location',
           '$rootScope',
           'resolve',
-          function($scope, $route, $http, $location, $rootScope, resolve) {
+          'userFactory',
+          function($scope, $route, $http, $location, $rootScope, resolve, userFactory) {
             var url = $route.current.templateUrl.substring(templateBase.length);
             var tempInfo = user.templates[url];
             if (!tempInfo)
               return;
             page = 1;
             var header = {};
+            user.profile = userFactory.curProfile();
+            $scope.user = user.profile;
             $rootScope.back = function() {
               console.log("inside more click");
               $location.path('/user');
@@ -297,7 +158,7 @@ define(
               };
               
               if (!user.logout) {
-                user.methods.profile($http, $location);
+                userFactory.getProfile();
               }
               
               $scope.login = function() {
@@ -311,23 +172,8 @@ define(
                   alert("请输入密码!");
                   return;
                 }
-                var params = {
-                    type: 'user',
-                    act: 'login',
-                    username: username,
-                    password: password
-                };
                 
-                skyex.post($http, params, function(response) {
-                  switch (response.status) {
-                  case 1:
-                    user.methods.profile($http, $location, function() {
-                      $location.path('/user/home');
-                    });
-                    
-                    break;
-                  }
-                });
+                userFactory.login(username, password);
               };
               break;
             case 2:
@@ -341,7 +187,7 @@ define(
               };
               
               $scope.register = function() {
-                user.methods.register($http, $location);
+                user.methods.register(userFactory);
               };
               $scope.refresh = function() {
                 $('img').attr('src', skyex.captchaUrl());
@@ -356,7 +202,7 @@ define(
               };
               
               $scope.retrieve = function() {
-                user.methods.password.retrieve($http, $location);
+                user.methods.password.retrieve(userFactory);
               };
               break;
             case 4:
@@ -366,16 +212,15 @@ define(
                   backButtonIcon: 'arrow-l',
                   backButtonText: '返回',
               };
-              $scope.user = user.profile;
               $scope.updateProfile = function() {
-                user.methods.update($http, $location);
+                user.methods.update(userFactory);
               };
               $scope.verification = function() {
                 if (user.profile.is_email_validated == 1) {
                   return;
                 }
                 if (confirm('确定要发送验证信息吗？你的原邮箱验证信息将会失效！')) {
-                  user.methods.mail.verfiy($http, $location);
+                  userFactory.mail.verify();
                 }
                 
               };
@@ -401,9 +246,8 @@ define(
               header = {
                 title: '我的天易'
               };
-              $scope.user = user.profile;
               $scope.logout = function() {
-                user.methods.logout($http, $location);
+                userFactory.logout();
               };
               break;
             case 6:
@@ -418,13 +262,13 @@ define(
                 $location.path('/user/home');
               };
               $scope.passwordUpdate = function() {
-                user.methods.password.update($http, $location);
+                user.methods.password.update(userFactory);
               };
               break;
             }
             console.log('inside user ctrl');
             util.swap(2);
-
+            
             $rootScope.header = header;
             $rootScope.parseImage = util.parseUrl;
             $scope.$on('$routeChangeSuccess', util.contentLoad);

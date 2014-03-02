@@ -15,8 +15,6 @@ define(['skyex'], function(skyex) {
     this.$http = $http;
   };
   
-  
-  
   book.cache = cache;
   book.pids = pids;
   
@@ -31,6 +29,53 @@ define(['skyex'], function(skyex) {
     });
   };
   
+  book.category.getBackId = function() {
+    var ppid = 0;
+    if (pids.length > 1) {
+      ppid = pids[pids.length - 2];
+      console.log(pids);
+      pids.pop();
+      if (pids.length > 1) {
+        pids.pop();
+      }
+      console.log(pids);
+    }
+    return ppid;
+  };
+  
+  book.category.getBookBackId = function() {
+    var ppid = 0;
+    if (pids.length >= 1) {
+      ppid = pids[pids.length - 1];
+      pids.pop();
+    }
+    return ppid;
+  };
+  
+  book.category.getPid = function() {
+    console.log('get pid');
+    console.log(pids);
+    if (pids.length >= 1) {
+      //
+      var pid = pids[pids.length - 1];
+      if (pid != 0) {
+        return pid - 0;
+      }
+    }
+    return 0;
+  };
+  
+  book.category.getBookPid = function() {
+    if (pids.length >= 1) {
+      //
+      var pid = pids[pids.length - 1];
+      if (pid != 0) {
+        return pid;
+      }
+    }
+    return 0;
+  };
+  
   book.category.book = function(id, page, callback) {
     if (!parseInt(id)) {
       return null;
@@ -39,7 +84,8 @@ define(['skyex'], function(skyex) {
         type: 'book',
         act: 'list',
         id: id,
-        page: page
+        page: page,
+        __cache: true
     };
     return book.post(params, function(response) {
       for (var i = 0; i < response.data.length; i++) {
@@ -57,7 +103,8 @@ define(['skyex'], function(skyex) {
     var pid = id ? id : 0;
     var params = {
         type: 'category',
-        id: pid
+        id: pid,
+        __cache: true
     };
     if (cache.sub[pid]) {
       if (pid == 0) {
@@ -99,7 +146,8 @@ define(['skyex'], function(skyex) {
         type: 'book',
         act: 'search',
         page: page,
-        q: q
+        q: q,
+        __cache: true
     };
     return this.post(params, function(response) {
       for (var i = 0; i < response.data.length; i++) {
@@ -119,7 +167,8 @@ define(['skyex'], function(skyex) {
     var params = {
         type: 'book',
         act: 'info',
-        id: id
+        id: id,
+        __cache: true
     };
     return this.post(params, function(response) {
       if (response.data && response.data.length) {
@@ -138,7 +187,8 @@ define(['skyex'], function(skyex) {
     var params = {
         type: 'book',
         act: 'chapter',
-        id: id
+        id: id,
+        __cache: true
     };
     return this.post(params, function(response) {
       for (var i = 0; i < response.data.length; i++) {

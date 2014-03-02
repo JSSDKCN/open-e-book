@@ -44,7 +44,7 @@ define(
           'resolve',
           'bookFactory',
           function($scope, $route, $rootScope, $location, resolve, bookFactory) {
-            var pids = bookFactory.pids;
+            var bf = bookFactory;
             var cache = bookFactory.cache;
             page = 1;
             var url = $route.current.templateUrl.substring(templateBase.length);
@@ -58,34 +58,29 @@ define(
               header = {
                 title: '书籍分类'
               };
-              if (pids.length > 1) {
-                //
-                var pid = pids[pids.length - 1];
-                if (pid != 0) {
-                  title = cache.category[pid].name;
-                  header = {
-                      title: '书籍分类',
-                      showBackButton: true,
-                      backButtonIcon: 'arrow-l',
-                      backButtonText: '返回',
-                  };
-                }
+              var pid = bf.category.getPid();
+              console.log("pid = " + pid);
+              if (pid != 0) {
+                title = cache.category[pid].name;
+                header = {
+                    title: '书籍分类',
+                    showBackButton: true,
+                    backButtonIcon: 'arrow-l',
+                    backButtonText: '返回',
+                };
               }
               
+              console.log('inside 1');
               $rootScope.back = function() {
                 console.log('inside back');
-                var ppid = 0;
-                if (pids.length > 1) {
-                  ppid = pids[pids.length - 2];
-                  console.log(pids);
-                  pids.pop();
-                  if (pids.length > 1) {
-                    pids.pop();
-                  }
-                  console.log(pids);
-                }
-                console.log(ppid);
-                
+                var ppid = bf.category.getBackId();
+                /*
+                 * if (pids.length > 1) { ppid = pids[pids.length - 2];
+                 * console.log(pids); bookFactory.pids.pop(); if (pids.length >
+                 * 1) { bookFactory.pids.pop(); } console.log(pids); }
+                 * console.log(ppid);
+                 */
+
                 var path = '/category/' + ppid;
                 $location.path(path);
               };
@@ -98,27 +93,25 @@ define(
               header = {
                 title: '书籍分类'
               };
-              if (pids.length > 1) {
-                //
-                var pid = pids[pids.length - 1];
-                if (pid != 0) {
-                  title = cache.category[pid].name;
-                  header = {
-                      title: title,
-                      showBackButton: true,
-                      backButtonIcon: 'arrow-l',
-                      backButtonText: '返回',
-                  };
-                }
+              //console.log(pids);
+              
+              var pid = bf.category.getBookPid();
+              
+              if (pid != 0) {
+                title = cache.category[pid].name;
+                header = {
+                    title: title,
+                    showBackButton: true,
+                    backButtonIcon: 'arrow-l',
+                    backButtonText: '返回',
+                };
               }
+              // conso
               
               $rootScope.back = function() {
                 console.log('inside back');
-                var ppid = 0;
-                if (pids.length >= 1) {
-                  ppid = pids[pids.length - 1];
-                  pids.pop();
-                }
+                var ppid = bf.category.getBookBackPid();
+
                 var path = '/category/' + ppid;
                 $location.path(path);
               };
@@ -130,15 +123,18 @@ define(
                 console.log('more ... ');
                 console.log(page);
                 page = page + 1;
-                bookFactory.category.book($route.current.params.id, page, function(response) {
-                  console.log('more end ..');
-                  console.log(response);
-                  if (!response.data.length) {
-                    $('#more').remove();
-                  } else {
-                    $scope.$apply();
-                  }
-                });
+                bookFactory.category.book($route.current.params.id, page,
+                    function(response) {
+                      console.log('more end ..');
+                      console.log(response);
+                      if (!response.data.length) {
+                        $('#more').remove();
+                      } else {
+                        $scope.books.concat(response.data);
+                        $scope.$broadcast('scroll.infiniteScrollComplete');
+                        // $scope.$apply();
+                      }
+                    });
               };
               
               break;

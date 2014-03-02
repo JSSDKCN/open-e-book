@@ -69,10 +69,12 @@ define(
                 bookFactory.search(q, page, function(response) {
                   console.log('more end ..');
                   console.log(response);
-                  if (response.data.length) {
+                  if (!response.data.length) {
                     $('#more').remove();
                   } else {
-                    $scope.$apply();
+                    $scope.books.concat(response.data);
+                    $scope.$broadcast('scroll.infiniteScrollComplete');
+                    //$scope.$apply();
                   }
                 });
               };

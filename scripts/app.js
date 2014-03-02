@@ -1,6 +1,6 @@
 define(["angular", "angular-resource", 'angular-route', 'skyex', 'category', 'util', 'navbar',
-        'book', 'more', 'user', 'local', 'bookFactory'], function(angular,
-    ngResource, ngRoute, skyex, category, util, navbar, book, more, user, local, bookFactory) {
+        'book', 'more', 'user', 'local', 'bookFactory', 'userFactory'], function(angular,
+    ngResource, ngRoute, skyex, category, util, navbar, book, more, user, local, bookFactory, userFactory) {
 
   var app = angular.module("app", angularModules);
   // you can do some more stuff here like calling app.factory()...
@@ -8,6 +8,8 @@ define(["angular", "angular-resource", 'angular-route', 'skyex', 'category', 'ut
   //Factories
   app.factory('skyex', ['$http', skyex]);
   app.factory('bookFactory', bookFactory);
+  app.factory('userFactory', userFactory); 
+  
   // Config $routeProvider
   templateBase = templateBase || "templates/";
   console.log(templateBase);

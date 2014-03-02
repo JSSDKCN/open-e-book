@@ -66,7 +66,6 @@ define(function() {
             if ($.mobile) {
               $.mobile.loading("hide");
             }
-            
           },
           showLimited: function(message, time) {
             time = time || 100;
@@ -104,12 +103,22 @@ define(function() {
           transformRequest = null;
           
         } else {
-          if (this.cache[JSON.stringify(requestData)]) {
-            return callback(this.cache[JSON.stringify(requestData)]);
-          }
+
           
           if (sessionToken) {
             requestData[sessionToken[0]] = sessionToken[1];
+          }
+          console.log('inside request ');
+          console.log(requestData);
+
+          if (this.cache[JSON.stringify(requestData)] && requestData['__cache']) {
+            console.log('get cached data');
+            //console.log(requestData);
+            return callback(this.cache[JSON.stringify(requestData)]);
+          }
+          
+          if (requestData['__cache']) {
+            delete requestData['__cache'];
           }
         }
         
@@ -135,6 +144,8 @@ define(function() {
           self.session.update(response.data);
           if (response.status !== 0) {
             self.cache[JSON.stringify(requestData)] = response.data;
+            console.log('inside save ');
+            console.log(requestData);
             return callback(response.data);
           }
           if (response.info) {

@@ -41,7 +41,7 @@ require.config({
         
         //Agnular Factory
         bookFactory: 'factory/book',
-        //categoryFactory: 'factory/category'
+        userFactory: 'factory/user'
         
     
     },
