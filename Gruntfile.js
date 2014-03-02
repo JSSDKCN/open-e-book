@@ -64,12 +64,14 @@ module.exports = function(grunt) {
       copy: {
         main: {
           files: [{
-              src: 'Library/ionic/fonts/*',
+              expand: true,
+              cwd: 'Library/ionic/fonts/',
+              src: ['**'],
               dest: 'dest/ionic/fonts/',
           }, {
-            src: 'ionic.html',
-            dest: 'dest/ionic/ionic.html',
-        }]
+              src: 'templates/ionic/index.html',
+              dest: 'dest/ionic/ionic.html',
+          }]
         
         }
       }
@@ -135,10 +137,11 @@ module.exports = function(grunt) {
         main: {
           files: [{
               expand: true,
-              src: 'Library/jquery.mobile-1.4.0/images/**',
+              cwd: 'Library/jquery.mobile-1.4.0/images/',
+              src: ['**'],
               dest: 'dest/jqm/images/'
           }, {
-              src: 'index.html',
+              src: 'templates/jquerymobile/index.html',
               dest: 'dest/jqm/jqm.html'
           }]
         }
@@ -153,10 +156,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
   grunt.loadNpmTasks('grunt-inline-angular-templates');
   
-  grunt.registerTask('default', ['copy', 'inline_angular_templates', 'htmlmin', 'requirejs',
-      'cssmin']);
+  grunt.registerTask('default', ['copy', 'inline_angular_templates', 'htmlmin',
+      'requirejs', 'cssmin']);
   
-  //grunt.registerTask('default', ['copy', 'inline_angular_templates']);
+  // grunt.registerTask('default', ['copy', 'inline_angular_templates']);
   grunt.registerTask('template', ['inline_angular_templates']);
   
 };
