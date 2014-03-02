@@ -11,12 +11,6 @@ require.config({
         'angular-ui-router': '../Library/angular-1.2.13/angular-ui-router',
         
         
-        //ionic Library
-        ionic: '../Library/ionic/scripts/ionic',
-        ionicBundle: '../Library/ionic/scripts/ionic.bundle',
-        ionicAngular: '../Library/ionic/scripts/ionic-angular',
-        
-        
         jQuery: '../Library/jquery-2.0.3',
         //jQuery: '../Library/jquery-1.11.0',
         jQueryMobile: '../Library/jquery.mobile-1.4.0/jquery.mobile-1.4.0',
@@ -37,6 +31,11 @@ require.config({
         more: 'controllers/more',
         user: 'controllers/user',
         local: 'controllers/local',
+        body: 'controllers/body',
+        
+        //Agnular Factory
+        bookFactory: 'factory/book',
+        userFactory: 'factory/user'
     },
     shim: {
         'jQuery': {
