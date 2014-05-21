@@ -9,3 +9,14 @@ Key features are as follows:<br/>
 2. exchange ideas on books, comment on books<br/>
 3. the ablity to create new book, publish own book, selling book<br/>
 
+How to User
+===============
+
+<code>
+npn install -g http-server
+http-server -p 8080
+</code>
+
+Visit localhost:8080
+
+You will see the book list.
