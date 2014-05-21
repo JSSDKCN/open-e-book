@@ -17,6 +17,8 @@ How to User
     http-server -p 8080
 </pre>
 
-Visit localhost:8080
-
+Visit
+<pre>
+http://localhost:8080
+</pre>
 You will see the book list.
