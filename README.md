@@ -12,10 +12,10 @@ Key features are as follows:<br/>
 How to User
 ===============
 
-<code>
-npn install -g http-server
-http-server -p 8080
-</code>
+<pre>
+    npn install -g http-server
+    http-server -p 8080
+</pre>
 
 Visit localhost:8080
 
