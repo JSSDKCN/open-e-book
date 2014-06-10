@@ -13,7 +13,7 @@ How to User
 ===============
 
 <pre>
-    npn install -g http-server
+    npm install -g http-server
     http-server -p 8080
 </pre>
 
